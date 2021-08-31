@@ -31,6 +31,7 @@ class _HomePageState extends State<HomePage> {
                     ]),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Stack(
                       children: [
