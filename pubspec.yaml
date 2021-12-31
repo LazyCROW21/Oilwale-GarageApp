@@ -1,5 +1,5 @@
 name: garage_app
-description: A new Flutter project.
+description: Oil products market chaining and distribution monitoring, customer tracking and e-commerce application.
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `pub publish`. This is preferred for private packages.
@@ -23,7 +23,14 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
+  curved_navigation_bar: ^1.0.1
+  flutter_spinkit: ^5.0.0
+  carousel_slider: ^4.0.0
+  fluttertoast: ^8.0.4
+  shared_preferences: ^2.0.6
+  flutter_native_splash: ^1.0.1
+  flutter_launcher_icons: "^0.9.0"
+  intl: ^0.17.0
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -36,18 +43,34 @@ dev_dependencies:
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
+
+flutter_native_splash:
+  color: "#ffffff"
+  image: assets/img/mplubricantslogo.png
+  android: true
+  ios: true
+
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: assets/img/icon/icon.png
+
 # The following section is specific to Flutter.
 flutter:
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
-   uses-material-design: true
+  uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-#   assets:
-#      - assets/files
-  #   - images/a_dot_ham.jpeg
+  assets:
+    - assets/img/bg.jpg
+    - assets/img/bgsq.png
+    - assets/img/bgsq.jpg
+    - assets/img/mplubricantslogo.png
+    - assets/img/oil_barrel.gif
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
