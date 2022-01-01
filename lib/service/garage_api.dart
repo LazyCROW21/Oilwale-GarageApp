@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:oilwale/models/garage.dart';
+import 'package:garage_app/models/garage.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -82,7 +82,7 @@ class GarageAPIManager {
           preferences.setString('pincode', jsonMap['pincode']);
           preferences.setString('name', jsonMap['name']);
           preferences.setString('phoneNumber', jsonMap['phoneNumber']);
-          preferences.setString('alternateNumber', jsonMap['alternateeNumber']);
+          preferences.setString('alternateNumber', jsonMap['alternateNumber']);
           preferences.setString('gstNumber', jsonMap['gstNumber']);
           preferences.setString('panCard', jsonMap['panCard']);
           preferences.setString('area', jsonMap['area']);
@@ -92,7 +92,7 @@ class GarageAPIManager {
         } on Exception catch (exception) {
           print(exception);
           print(
-              "There is some issue on the server . Please try after some time ");
+              "There is some issue on the server. Please try after some time");
         }
         return garage;
       } else {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:oilwale/models/product.dart';
-import 'package:oilwale/screens/garage/globals.dart';
+import 'package:garage_app/models/product.dart';
+import 'package:garage_app/screens/garage/globals.dart';
 
 class ItemWidget extends StatefulWidget {
   final Product product;
@@ -21,7 +21,10 @@ class _ItemWidgetState extends State<ItemWidget> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () { Navigator.pushNamed(context, '/cust_product',arguments: widget.product);},
+      onTap: () {
+        Navigator.pushNamed(context, '/cust_product',
+            arguments: widget.product);
+      },
       child: Padding(
           padding: EdgeInsets.only(left: 10.0, right: 15.0, top: 15.0),
           child: Container(
@@ -72,7 +75,7 @@ class _ItemWidgetState extends State<ItemWidget> {
                       ),
                       Container(
                         child: Text(
-                         "Grade :" + widget.product.grade,
+                          "Grade :" + widget.product.grade,
                           style: TextStyle(fontSize: 10.0, color: Colors.grey),
                         ),
                       ),
@@ -87,8 +90,8 @@ class _ItemWidgetState extends State<ItemWidget> {
                                 onPressed: () {
                                   setState(() {
                                     if (count == "Added to Cart") {
-                                      added =
-                                          Colors.deepOrange[200]!.withOpacity(.3);
+                                      added = Colors.deepOrange[200]!
+                                          .withOpacity(.3);
                                       count = "Add to Cart";
                                       cartaddedtext = Colors.deepOrange;
                                       cartnum--;
@@ -120,5 +123,3 @@ class _ItemWidgetState extends State<ItemWidget> {
     );
   }
 }
-
-
