@@ -86,7 +86,10 @@ class OfferDetails extends StatelessWidget {
                 Expanded(child: ListView.builder(
                     itemCount: offers.productList.length,
                     itemBuilder: (context, index) {
-                      return OffersProductTile(product: offers.productList[index]);
+
+                      return offers.productList.length <= 0 ?
+                            child! :
+                        OffersProductTile(product: offers.productList[index]);
                     })),
                 SizedBox(
                   height: 10.0,
