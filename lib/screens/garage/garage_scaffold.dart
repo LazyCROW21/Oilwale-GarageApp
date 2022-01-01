@@ -54,7 +54,8 @@ class _GarageScaffoldState extends State<GarageScaffold> {
       FloatingActionButton(
         elevation: 2.0,
         onPressed: () {
-          Navigator.pushNamed(context, '/cart');
+          Navigator.of(context).pushNamed('/cart');
+          // Navigator.pushNamed(context, '/cart');
         },
         child: Stack(
           children: [

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:garage_app/providers/cartprovider.dart';
+import 'package:provider/src/provider.dart';
 import '../models/product.dart';
 
 class CartWidget extends StatefulWidget {
@@ -52,21 +54,21 @@ class _CartWidgetState extends State<CartWidget> {
                       SizedBox(
                         height: 5.0,
                       ),
+                      // Container(
+                      //   width: 175.0,
+                      //   child: Text(
+                      //     widget.item.specification,
+                      //     textAlign: TextAlign.left,
+                      //     style: TextStyle(
+                      //       fontSize: 12.0,
+                      //       color: Colors.grey[600],
+                      //     ),
+                      //   ),
+                      // ),
                       Container(
-                        width: 175.0,
                         child: Text(
-                          widget.item.specification,
-                          textAlign: TextAlign.left,
-                          style: TextStyle(
-                            fontSize: 12.0,
-                            color: Colors.grey[600],
-                          ),
-                        ),
-                      ),
-                      Container(
-                        child: Text(
-                          "volume : 4L",
-                          style: TextStyle(fontSize: 10.0, color: Colors.grey),
+                          "volume : ${widget.item.packingSize}",
+                          style: TextStyle(fontSize: 12.0, color: Colors.grey),
                         ),
                       ),
                       SizedBox(height: 8.0),
@@ -126,7 +128,9 @@ class _CartWidgetState extends State<CartWidget> {
               child: IconButton(
                 icon: Icon(Icons.cancel_outlined),
                 color: Colors.black,
-                onPressed: () {},
+                onPressed: () {
+                  context.read<CartProvider>().removeProduct(widget.item);
+                },
               )),
         ]));
   }

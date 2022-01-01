@@ -13,12 +13,22 @@ class ItemWidget extends StatefulWidget {
 }
 
 class _ItemWidgetState extends State<ItemWidget> {
-  var btnText = " Add to Cart ";
-  Color added = Colors.deepOrange[200]!.withOpacity(.1);
-  Color cartaddedtext = Colors.deepOrange;
+  var btnText = "Add to Cart";
+  bool inCart = false;
+  Color addToBtnBGColor = Colors.deepOrange[200]!.withOpacity(.3);
+  Color addedBtnBGColor = Colors.green.withOpacity(.7);
+  Text addToCartText = Text("Add to Cart",
+      textAlign: TextAlign.center,
+      style: TextStyle(color: Colors.deepOrange, fontSize: 12.0));
+  Text addedToCartText = Text("In Cart",
+      textAlign: TextAlign.center,
+      style: TextStyle(color: Colors.white, fontSize: 12.0));
 
   @override
   Widget build(BuildContext context) {
+    inCart = context.select((CartProvider cartprovider) {
+      return cartprovider.checkProductInChart(widget.product);
+    });
     return InkWell(
       onTap: () {
         Navigator.pushNamed(context, '/cust_product',
@@ -91,17 +101,12 @@ class _ItemWidgetState extends State<ItemWidget> {
                                     if (context
                                         .read<CartProvider>()
                                         .checkProductInChart(widget.product)) {
-                                      added = Colors.deepOrange[200]!
-                                          .withOpacity(.3);
-                                      btnText = "Add to Cart";
-                                      cartaddedtext = Colors.deepOrange;
+                                      inCart = true;
                                       context
                                           .read<CartProvider>()
                                           .removeProduct(widget.product);
                                     } else {
-                                      btnText = "In Cart";
-                                      added = Colors.green;
-                                      cartaddedtext = Colors.white;
+                                      inCart = false;
                                       context
                                           .read<CartProvider>()
                                           .addProduct(widget.product);
@@ -109,13 +114,12 @@ class _ItemWidgetState extends State<ItemWidget> {
                                   });
                                 },
                                 style: TextButton.styleFrom(
-                                    backgroundColor: added.withOpacity(0.7)),
-                                child: Text(
-                                  btnText,
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      color: cartaddedtext, fontSize: 12.0),
-                                )),
+                                  backgroundColor: inCart
+                                      ? addedBtnBGColor
+                                      : addToBtnBGColor,
+                                ),
+                                child:
+                                    inCart ? addedToCartText : addToCartText),
                           ),
                         ],
                       )
