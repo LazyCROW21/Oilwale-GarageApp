@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:garage_app/models/offer.dart';
-import 'package:garage_app/widgets/OffersWidget.dart';
+import 'package:garage_app/components/offerproducttile.dart';
 
 class OfferDetails extends StatelessWidget {
   const OfferDetails({Key? key}) : super(key: key);
