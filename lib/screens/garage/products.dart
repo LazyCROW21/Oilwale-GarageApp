@@ -6,7 +6,7 @@ import 'package:garage_app/theme/themedata.dart';
 import 'package:garage_app/widgets/ItemWidget.dart';
 
 class ProductsPage extends StatelessWidget {
-  const ProductsPage({Key? key}) : super(key: key);
+  const ProductsPage({Key? key,}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +29,13 @@ class _ProductViewState extends State<ProductView> {
     color: AppColorSwatche.primary,
   );
   bool isSearching = true;
+
+  @override
+  void setState(VoidCallback fn) {
+    if (mounted) {
+      super.setState(fn);
+    }
+  }
 
   @override
   void initState() {
@@ -98,12 +105,12 @@ class _ProductViewState extends State<ProductView> {
             child: isSearching
                 ? loadingRing
                 : ListView.builder(
-                    itemCount: _pList.length,
-                    itemBuilder: (context, index) {
-                      return ItemWidget(
-                        product: _pList[index],
-                      );
-                    }),
+                itemCount: _pList.length,
+                itemBuilder: (context, index) {
+                  return ItemWidget(
+                    product: _pList[index],
+                  );
+                }),
           ),
         ),
       ]),

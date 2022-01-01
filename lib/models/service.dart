@@ -37,7 +37,7 @@ class ServiceHistory {
           phoneNumber: '',
           pincode: '',
           referralCode: '',
-          totaCustomer: 0,
+          totalCustomer: 0,
           totalScore: 0);
     }
     List products = json['products'] ?? [];

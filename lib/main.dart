@@ -10,6 +10,7 @@ import 'package:garage_app/screens/garage/offers.dart';
 import 'package:garage_app/screens/login.dart';
 import 'package:garage_app/screens/logout.dart';
 import 'package:garage_app/theme/themedata.dart';
+import 'package:garage_app/screens/garage/productPage.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
@@ -32,13 +33,13 @@ void main() {
       // '/': (context) => SplashScreen(),
       '/login': (context) => LoginScreen(),
       '/logout': (context) => LogoutScreen(),
-      '/cust_addvehicle': (context) => AddVehicleForm(),
       '/garage_home': (context) => GarageScaffold(),
       '/garage_offers': (context) => OffersPage(),
       '/cart': (context) => CartPage(),
       '/offer_details': (context) => OfferDetails(),
       '/garage_history': (context) => PurchaseHistory(),
       '/purchased_product': (context) => ShowProductbought(),
+      '/cust_product': (context) => ProductPage(),
     },
   ));
 }

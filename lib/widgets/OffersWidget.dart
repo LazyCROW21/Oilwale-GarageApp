@@ -1,64 +1,73 @@
 import 'package:flutter/material.dart';
-import 'package:garage_app/models/offer.dart';
+import 'package:garage_app/models/product.dart';
+import 'package:garage_app/theme/themedata.dart';
+class OffersProductTile extends StatelessWidget {
+  final Product product;
 
-class OffersWidget extends StatelessWidget {
-  const OffersWidget({Key? key, required this.offers}) : super(key: key);
-  final Offer offers;
+  const OffersProductTile({Key? key, required this.product}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      child: InkWell(
-        onTap: () {
-          Navigator.pushNamed(context, '/offer_details', arguments: offers);
-        },
-        child: Card(
-          elevation: 4.0,
-          margin: EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 4.0),
-          child: Row(
-            children: [
-              Expanded(
-                flex: 1,
-                child: Container(
-                  height: 50.0,
-                  width: 50.0,
-                  margin: EdgeInsets.all(15.0),
-                  child: Icon(
-                    Icons.local_offer_rounded,
-                    color: Colors.deepOrange,
+    return Card(
+      child: Hero(
+        tag: ValueKey(product.id),
+        child: MaterialButton(
+          padding: EdgeInsets.zero,
+          onPressed: () {
+            Navigator.pushNamed(context, "/cust_product", arguments: product);
+          },
+          child: Container(
+              margin: EdgeInsets.symmetric(vertical: 4.0),
+              padding: EdgeInsets.all(8.0),
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.all(Radius.circular(8.0))),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                    flex: 1,
+                    child: ClipRRect(
+                        borderRadius: BorderRadius.circular(8.0),
+                        child: Image.network(
+                          'https://picsum.photos/200',
+                          height: 50,
+                          width: 50,
+                        )),
                   ),
-                ),
-              ),
-              Expanded(
-                flex: 3,
-                child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        offers.schemeName.toUpperCase(),
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 14.0),
-                      ),
-                      SizedBox(
-                        height: 5.0,
-                      ),
-                      Text(
-                        "offers.description halleleua",
-                        style:
-                            TextStyle(fontSize: 12.0, color: Colors.deepOrange),
-                      ),
-                      SizedBox(
-                        height: 5.0,
-                      ),
-                      Text(
-                        "Last Date  :" + offers.endsAt.substring(0, 10),
-                        style:
-                            TextStyle(fontSize: 11.0, color: Colors.grey[800]),
-                      )
-                    ]),
-              ),
-            ],
-          ),
+                  SizedBox(
+                    width: 8.0,
+                  ),
+                  Expanded(
+                      flex: 3,
+                      child: Container(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                                product.name,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(color: Colors.deepOrangeAccent,fontSize: 14.0
+                                ) ),
+                            SizedBox(height: 2.0,),
+                            Row(
+                              children: [
+                                Text('Grade: ',
+                                    style:
+                                    TextStyle(color: Colors.grey,fontSize: 12.0)),
+                                Text(product.grade,
+                                    style: TextStyle(
+                                        fontSize : 12.0, color: AppColorSwatche.primary)),
+                              ],
+                            ),
+                            Text(product.specification,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(color: AppColorSwatche.grey,fontSize: 12.0)),
+                          ],
+                        ),
+                      )),
+                ],
+              )),
         ),
       ),
     );

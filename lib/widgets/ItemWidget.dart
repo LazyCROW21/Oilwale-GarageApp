@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:garage_app/models/product.dart';
-import 'package:garage_app/screens/garage/globals.dart';
+import 'package:provider/src/provider.dart';
+import '../screens/garage/Providers/CartProvider.dart';
 
 class ItemWidget extends StatefulWidget {
   final Product product;
@@ -13,17 +14,14 @@ class ItemWidget extends StatefulWidget {
 
 class _ItemWidgetState extends State<ItemWidget> {
   var count = " Add to Cart ";
-
   Color added = Colors.deepOrange[200]!.withOpacity(.1);
-
   Color cartaddedtext = Colors.deepOrange;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.pushNamed(context, '/cust_product',
-            arguments: widget.product);
+        Navigator.pushNamed(context, '/cust_product', arguments: widget.product);
       },
       child: Padding(
           padding: EdgeInsets.only(left: 10.0, right: 15.0, top: 15.0),
@@ -89,19 +87,21 @@ class _ItemWidgetState extends State<ItemWidget> {
                             child: TextButton(
                                 onPressed: () {
                                   setState(() {
-                                    if (count == "Added to Cart") {
-                                      added = Colors.deepOrange[200]!
-                                          .withOpacity(.3);
+                                    if (context.read<CartProvider>().cartProduct.contains(widget.product)) {
+                                      added = Colors.deepOrange[200]!.withOpacity(.3);
                                       count = "Add to Cart";
                                       cartaddedtext = Colors.deepOrange;
-                                      cartnum--;
+                                      context.read<CartProvider>().decrement();
+                                      context.read<CartProvider>().removeProduct(widget.product);
                                     } else {
                                       count = "Added to Cart";
                                       added = Colors.green;
+                                      context.read<CartProvider>().increment();
                                       cartaddedtext = Colors.white;
-                                      cartnum++;
+                                      context.read<CartProvider>().addProduct(widget.product);
                                     }
-                                  });
+                                  }
+                                  );
                                 },
                                 style: TextButton.styleFrom(
                                     backgroundColor: added.withOpacity(0.7)),
