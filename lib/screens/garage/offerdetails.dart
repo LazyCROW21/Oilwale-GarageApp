@@ -8,10 +8,7 @@ class OfferDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Offer offers = ModalRoute
-        .of(context)!
-        .settings
-        .arguments as Offer;
+    final Offer offers = ModalRoute.of(context)!.settings.arguments as Offer;
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -68,11 +65,11 @@ class OfferDetails extends StatelessWidget {
                     children: [
                       Expanded(
                           child: Text(
-                            "Last Date:",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.deepOrangeAccent),
-                          )),
+                        "Last Date:",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.deepOrangeAccent),
+                      )),
                       Expanded(
                         flex: 2,
                         child: Text(offers.endsAt.substring(0, 10)),
@@ -83,14 +80,13 @@ class OfferDetails extends StatelessWidget {
                 SizedBox(
                   height: 30.0,
                 ),
-                Expanded(child: ListView.builder(
-                    itemCount: offers.productList.length,
-                    itemBuilder: (context, index) {
-
-                      return offers.productList.length <= 0 ?
-                            child! :
-                        OffersProductTile(product: offers.productList[index]);
-                    })),
+                Expanded(
+                    child: ListView.builder(
+                        itemCount: offers.productList.length,
+                        itemBuilder: (context, index) {
+                          return OffersProductTile(
+                              product: offers.productList[index]);
+                        })),
                 SizedBox(
                   height: 10.0,
                 ),
@@ -117,7 +113,4 @@ class OfferDetails extends StatelessWidget {
       ),
     );
   }
-}
-
-class OffersProductTile {
 }

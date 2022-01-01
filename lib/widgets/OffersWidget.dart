@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:garage_app/models/product.dart';
 import 'package:garage_app/theme/themedata.dart';
+
 class OffersProductTile extends StatelessWidget {
   final Product product;
 
@@ -44,25 +45,30 @@ class OffersProductTile extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                                product.name,
+                            Text(product.name,
                                 overflow: TextOverflow.ellipsis,
-                                style: TextStyle(color: Colors.deepOrangeAccent,fontSize: 14.0
-                                ) ),
-                            SizedBox(height: 2.0,),
+                                style: TextStyle(
+                                    color: Colors.deepOrangeAccent,
+                                    fontSize: 14.0)),
+                            SizedBox(
+                              height: 2.0,
+                            ),
                             Row(
                               children: [
                                 Text('Grade: ',
-                                    style:
-                                    TextStyle(color: Colors.grey,fontSize: 12.0)),
+                                    style: TextStyle(
+                                        color: Colors.grey, fontSize: 12.0)),
                                 Text(product.grade,
                                     style: TextStyle(
-                                        fontSize : 12.0, color: AppColorSwatche.primary)),
+                                        fontSize: 12.0,
+                                        color: AppColorSwatche.primary)),
                               ],
                             ),
                             Text(product.specification,
                                 overflow: TextOverflow.ellipsis,
-                                style: TextStyle(color: AppColorSwatche.grey,fontSize: 12.0)),
+                                style: TextStyle(
+                                    color: AppColorSwatche.grey,
+                                    fontSize: 12.0)),
                           ],
                         ),
                       )),
