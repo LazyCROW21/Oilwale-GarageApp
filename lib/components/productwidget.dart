@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:garage_app/models/product.dart';
-import 'package:provider/src/provider.dart';
-import '../screens/garage/Providers/CartProvider.dart';
+import 'package:provider/provider.dart';
+import 'package:garage_app/providers/cartprovider.dart';
 
 class ItemWidget extends StatefulWidget {
   final Product product;
@@ -13,7 +13,7 @@ class ItemWidget extends StatefulWidget {
 }
 
 class _ItemWidgetState extends State<ItemWidget> {
-  var count = " Add to Cart ";
+  var btnText = " Add to Cart ";
   Color added = Colors.deepOrange[200]!.withOpacity(.1);
   Color cartaddedtext = Colors.deepOrange;
 
@@ -21,7 +21,8 @@ class _ItemWidgetState extends State<ItemWidget> {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.pushNamed(context, '/cust_product', arguments: widget.product);
+        Navigator.pushNamed(context, '/cust_product',
+            arguments: widget.product);
       },
       child: Padding(
           padding: EdgeInsets.only(left: 10.0, right: 15.0, top: 15.0),
@@ -87,26 +88,30 @@ class _ItemWidgetState extends State<ItemWidget> {
                             child: TextButton(
                                 onPressed: () {
                                   setState(() {
-                                    if (context.read<CartProvider>().cartProduct.contains(widget.product)) {
-                                      added = Colors.deepOrange[200]!.withOpacity(.3);
-                                      count = "Add to Cart";
+                                    if (context
+                                        .read<CartProvider>()
+                                        .checkProductInChart(widget.product)) {
+                                      added = Colors.deepOrange[200]!
+                                          .withOpacity(.3);
+                                      btnText = "Add to Cart";
                                       cartaddedtext = Colors.deepOrange;
-                                      context.read<CartProvider>().decrement();
-                                      context.read<CartProvider>().removeProduct(widget.product);
+                                      context
+                                          .read<CartProvider>()
+                                          .removeProduct(widget.product);
                                     } else {
-                                      count = "Added to Cart";
+                                      btnText = "In Cart";
                                       added = Colors.green;
-                                      context.read<CartProvider>().increment();
                                       cartaddedtext = Colors.white;
-                                      context.read<CartProvider>().addProduct(widget.product);
+                                      context
+                                          .read<CartProvider>()
+                                          .addProduct(widget.product);
                                     }
-                                  }
-                                  );
+                                  });
                                 },
                                 style: TextButton.styleFrom(
                                     backgroundColor: added.withOpacity(0.7)),
                                 child: Text(
-                                  count,
+                                  btnText,
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                       color: cartaddedtext, fontSize: 12.0),

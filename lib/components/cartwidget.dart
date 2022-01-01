@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:garage_app/screens/garage/Providers/CartProvider.dart';
-import 'package:provider/src/provider.dart';
 import '../models/product.dart';
 
 class CartWidget extends StatefulWidget {
@@ -14,20 +12,10 @@ class CartWidget extends StatefulWidget {
 
 class _CartWidgetState extends State<CartWidget> {
   var count = 1;
-  bool visibilitytag = true;
-
-  void _changed() {
-    setState(() {
-      visibilitytag = false;
-      context.read<CartProvider>().decrement();
-      context.read<CartProvider>().removeProduct(widget.item);
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
-    return visibilitytag
-        ? Padding(
+    return Padding(
         padding: EdgeInsets.only(left: 10.0, right: 15.0, top: 15.0),
         child: Stack(children: [
           Container(
@@ -57,8 +45,7 @@ class _CartWidgetState extends State<CartWidget> {
                           Text(
                             widget.item.name,
                             style: TextStyle(
-                                fontSize: 17.0,
-                                fontWeight: FontWeight.bold),
+                                fontSize: 17.0, fontWeight: FontWeight.bold),
                           ),
                         ],
                       ),
@@ -79,8 +66,7 @@ class _CartWidgetState extends State<CartWidget> {
                       Container(
                         child: Text(
                           "volume : 4L",
-                          style:
-                          TextStyle(fontSize: 10.0, color: Colors.grey),
+                          style: TextStyle(fontSize: 10.0, color: Colors.grey),
                         ),
                       ),
                       SizedBox(height: 8.0),
@@ -95,16 +81,16 @@ class _CartWidgetState extends State<CartWidget> {
                                 children: [
                                   Expanded(
                                       child: TextButton(
-                                        onPressed: () {
-                                          setState(() {
-                                            if (count > 1) count--;
-                                          });
-                                        },
-                                        child: Icon(
-                                          Icons.remove,
-                                          color: Colors.deepOrange,
-                                        ),
-                                      )),
+                                    onPressed: () {
+                                      setState(() {
+                                        if (count > 1) count--;
+                                      });
+                                    },
+                                    child: Icon(
+                                      Icons.remove,
+                                      color: Colors.deepOrange,
+                                    ),
+                                  )),
                                   Expanded(
                                     child: Center(
                                       child: Text("$count"),
@@ -140,11 +126,8 @@ class _CartWidgetState extends State<CartWidget> {
               child: IconButton(
                 icon: Icon(Icons.cancel_outlined),
                 color: Colors.black,
-                onPressed: () {
-                  _changed();
-                },
+                onPressed: () {},
               )),
-        ]))
-        : Container();
+        ]));
   }
 }
