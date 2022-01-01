@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:garage_app/screens/garage/offers.dart';
 import 'package:garage_app/screens/garage/products.dart';
-import 'package:garage_app/screens/garage/home_page.dart';
 import 'package:garage_app/screens/garage/profile.dart';
-import '../garage/globals.dart';
+import 'package:provider/src/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import 'Providers/CartProvider.dart';
+import 'home_page.dart';
+import 'offers.dart';
 
 class GarageScaffold extends StatefulWidget {
   const GarageScaffold({Key? key}) : super(key: key);
@@ -14,7 +17,6 @@ class GarageScaffold extends StatefulWidget {
 
 class _GarageScaffoldState extends State<GarageScaffold> {
   int _currentindex = 0;
-
   void gotoOffers() {
     setState(() {
       _currentindex = 1;
@@ -65,7 +67,7 @@ class _GarageScaffoldState extends State<GarageScaffold> {
                         color: Colors.deepOrange,
                         borderRadius: BorderRadius.circular(6)),
                     child: Text(
-                      "$cartnum",
+                      "${context.watch<CartProvider>().cartnumprovider}",
                       style: TextStyle(color: Colors.white),
                       textAlign: TextAlign.center,
                     ))),
@@ -82,58 +84,60 @@ class _GarageScaffoldState extends State<GarageScaffold> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         actions: _currentindex == 3
-            ? [
-                PopupMenuButton(
-                    onSelected: (result) {
-                      if (result == 0) {
-                        Navigator.pushNamed(context, '/garage_history');
-                      } else if (result == 1) {
-                        Navigator.pushNamed(context, '/garage_home');
-                      } else if (result == 2) {
-                        Navigator.pushNamedAndRemoveUntil(
-                            context, '/login', ModalRoute.withName('/login'));
-                      }
-                    },
-                    offset: const Offset(0.0, 50.0),
-                    icon: Icon(
-                      Icons.more_vert,
-                      color: Colors.deepOrange,
-                    ),
-                    color: Colors.grey[300],
-                    itemBuilder: (context) => [
-                          PopupMenuItem(
-                              value: 0,
-                              child: Row(
-                                children: [
-                                  Icon(
-                                    Icons.history_rounded,
-                                    color: Colors.deepOrange,
-                                  ),
-                                  const SizedBox(
-                                    width: 7,
-                                  ),
-                                  Text("Purchase History"),
-                                ],
-                              )),
-                          PopupMenuItem(
-                              value: 2,
-                              child: Row(
-                                children: [
-                                  Icon(
-                                    Icons.logout,
-                                    color: Colors.deepOrange,
-                                  ),
-                                  const SizedBox(
-                                    width: 7,
-                                  ),
-                                  Text("Logout")
-                                ],
-                              ))
-                        ])
-              ]
+        ? [
+        PopupMenuButton(
+            onSelected:  (result) async {
+              if (result == 0) {
+                Navigator.pushNamed(context, '/garage_history');
+              } else if (result == 1) {
+                Navigator.pushNamed(context, '/garage_home');
+              } else if (result == 2) {
+                SharedPreferences sp = await SharedPreferences.getInstance();
+                sp.clear();
+                Navigator.pushNamedAndRemoveUntil(
+                    context, '/login', ModalRoute.withName('/login'));
+              }
+            },
+            offset: const Offset(0.0, 50.0),
+            icon: Icon(
+              Icons.more_vert,
+              color: Colors.deepOrange,
+            ),
+            color: Colors.grey[300],
+            itemBuilder: (context) => [
+              PopupMenuItem(
+                  value: 0,
+                  child: Row(
+                    children: [
+                      Icon(
+                        Icons.history_rounded,
+                        color: Colors.deepOrange,
+                      ),
+                      const SizedBox(
+                        width: 7,
+                      ),
+                      Text("Purchase History"),
+                    ],
+                  )),
+              PopupMenuItem(
+                  value: 2,
+                  child: Row(
+                    children: [
+                      Icon(
+                        Icons.logout,
+                        color: Colors.deepOrange,
+                      ),
+                      const SizedBox(
+                        width: 7,
+                      ),
+                      Text("Logout")
+                    ],
+                  ))
+            ])
+        ]
             : [],
         title: Text(
-          "Oil Wale",
+          "OilWale",
           style: TextStyle(color: Colors.deepOrange),
         ),
         centerTitle: true,

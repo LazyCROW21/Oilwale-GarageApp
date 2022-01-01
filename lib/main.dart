@@ -32,7 +32,6 @@ void main() {
       // '/': (context) => SplashScreen(),
       '/login': (context) => LoginScreen(),
       '/logout': (context) => LogoutScreen(),
-      '/cust_addvehicle': (context) => AddVehicleForm(),
       '/garage_home': (context) => GarageScaffold(),
       '/garage_offers': (context) => OffersPage(),
       '/cart': (context) => CartPage(),

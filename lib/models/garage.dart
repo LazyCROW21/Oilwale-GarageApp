@@ -1,29 +1,33 @@
 class Garage {
-  late final String garageId;
-  late final String address;
-  late final String? alternateNumber;
-  late final String area;
-  late final String garageName;
-  late final String? gstNumber;
-  late final String? panCard;
-  late final String? image;
-  late final String ownerName;
-  late final String phoneNumber;
-  late final String pincode;
-  late final String referralCode;
-  late final int totalScore;
-  late final int totaCustomer;
+  late  String garageId;
+  late  String address;
+  late  String? alternateNumber;
+  late  String area;
+  late  String garageName;
+  late  String? gstNumber;
+  late  String? image;
+  late  String ownerName;
+  late  String phoneNumber;
+  late String pincode;
+  late String? panCard;
+  late String referralCode;
+  late  int totalScore;
+  late int totalCustomer;
 
+  Garage.m({
+    required this.garageId
+  }
+      );
   Garage({
     required this.garageId,
     required this.address,
     this.alternateNumber,
+    this.panCard,
     required this.area,
     required this.garageName,
     this.gstNumber,
-    this.panCard,
     this.image,
-    required this.totaCustomer,
+    required this.totalCustomer,
     required this.totalScore,
     required this.ownerName,
     required this.phoneNumber,
@@ -33,6 +37,7 @@ class Garage {
 
   Garage.fromJSON(Map<String, dynamic> json) {
     this.garageId = json['garageId'];
+    this.panCard =json['panCard'];
     this.address = json['address'];
     this.alternateNumber = json['alternateNumber'];
     this.area = json['area'];
@@ -40,7 +45,7 @@ class Garage {
     this.gstNumber = json['gstNumber'];
     this.panCard = json['panCard'];
     this.image = json['image'];
-    this.totaCustomer = json['totalCustomer'];
+    this.totalCustomer = json['totalCustomer'];
     this.totalScore = json['totalScore'];
     this.ownerName = json['name'];
     this.phoneNumber = json['phoneNumber'];

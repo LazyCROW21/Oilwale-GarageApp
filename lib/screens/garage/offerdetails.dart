@@ -1,17 +1,22 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:garage_app/models/offer.dart';
+import 'package:garage_app/widgets/OffersWidget.dart';
 
 class OfferDetails extends StatelessWidget {
   const OfferDetails({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final Offer offers = ModalRoute.of(context)!.settings.arguments as Offer;
+    final Offer offers = ModalRoute
+        .of(context)!
+        .settings
+        .arguments as Offer;
 
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        backgroundColor: Colors.white,
         elevation: 3.0,
         centerTitle: true,
         title: Text(
@@ -63,11 +68,11 @@ class OfferDetails extends StatelessWidget {
                     children: [
                       Expanded(
                           child: Text(
-                        "Last Date:",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.deepOrangeAccent),
-                      )),
+                            "Last Date:",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.deepOrangeAccent),
+                          )),
                       Expanded(
                         flex: 2,
                         child: Text(offers.endsAt.substring(0, 10)),
@@ -78,91 +83,17 @@ class OfferDetails extends StatelessWidget {
                 SizedBox(
                   height: 30.0,
                 ),
-                Column(
-                  children: [
-                    Card(
-                      shadowColor:
-                          Colors.deepOrangeAccent[400]!.withOpacity(0.8),
-                      elevation: 3.0,
-                      child: Container(
-                          child: Row(
-                        children: [
-                          Container(
-                            margin: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 10.0),
-                            width: 40.0,
-                            height: 60.0,
-                            decoration: BoxDecoration(
-                                image: DecorationImage(
-                                    image: NetworkImage(
-                                        "https://picsum.photos/200"),
-                                    fit: BoxFit.cover)),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 6.0),
-                            child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text("Product No 40",
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold)),
-                                  Text(
-                                    "Discount : 50% ",
-                                  )
-                                ]),
-                          ),
-                        ],
-                      )),
-                    ),
-                    Card(
-                      shadowColor:
-                          Colors.deepOrangeAccent[400]!.withOpacity(0.8),
-                      elevation: 3.0,
-                      child: Container(
-                          child: Row(
-                        children: [
-                          Container(
-                            margin: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 10.0),
-                            width: 40.0,
-                            height: 60.0,
-                            decoration: BoxDecoration(
-                                image: DecorationImage(
-                                    image: NetworkImage(
-                                        "https://picsum.photos/200"),
-                                    fit: BoxFit.cover)),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 6.0),
-                            child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text("Product No 41s",
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold)),
-                                  Text("Discount : 50%")
-                                ]),
-                          ),
-                        ],
-                      )),
-                    )
-                  ],
-                ),
+                Expanded(child: ListView.builder(
+                    itemCount: offers.productList.length,
+                    itemBuilder: (context, index) {
+                      return OffersProductTile(product: offers.productList[index]);
+                    })),
                 SizedBox(
                   height: 10.0,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    // TextButton(
-                    //     onPressed: () {
-                    //       Navigator.pop(context, '/garage_offers');
-                    //     },
-                    //     style: TextButton.styleFrom(
-                    //       backgroundColor: Colors.red[100]!.withOpacity(0.5),
-                    //     ),
-                    //     // child: Text(
-                    //     //   "Decline",
-                    //     //   style: TextStyle(color: Colors.red),
-                    //     // )),
                     TextButton(
                         onPressed: () {
                           Navigator.pop(context, '/garage_offers');
@@ -183,4 +114,7 @@ class OfferDetails extends StatelessWidget {
       ),
     );
   }
+}
+
+class OffersProductTile {
 }

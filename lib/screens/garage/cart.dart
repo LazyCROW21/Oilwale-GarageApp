@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:garage_app/models/product.dart';
-import 'package:garage_app/service/product_api.dart';
 import 'package:garage_app/widgets/CartWidget.dart';
-
-import 'globals.dart';
+import 'package:provider/src/provider.dart';
+import 'Providers/CartProvider.dart';
 
 class CartPage extends StatefulWidget {
   const CartPage({Key? key}) : super(key: key);
@@ -13,20 +12,10 @@ class CartPage extends StatefulWidget {
 }
 
 class _CartPageState extends State<CartPage> {
-  List<Product> _pList = [];
 
-  void initState() {
-    super.initState();
-    ProductAPIManager.getAllProducts().then((resp) {
-      setState(() {
-        _pList = resp;
-      });
-    }).onError((error, stackTrace) {
-      print(error);
-    });
-  }
 
   Widget build(BuildContext context) {
+    List<Product> _pList = context.watch<CartProvider>().cartProduct;
     return Scaffold(
         backgroundColor: Colors.grey[200],
         appBar: new AppBar(
@@ -48,7 +37,7 @@ class _CartPageState extends State<CartPage> {
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
                   children: [
-                    Text("Items Purchased :  $cartnum"),
+                    Text("Items Purchased :  ${context.watch<CartProvider>().cartnumprovider}"),
                   ],
                 ),
               ),
