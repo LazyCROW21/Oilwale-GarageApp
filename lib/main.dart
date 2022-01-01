@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:garage_app/components/addvehicleform.dart';
+import 'package:garage_app/screens/garage/Providers/CartProvider.dart';
 import 'package:garage_app/screens/garage/PurdchaseHistory.dart';
 import 'package:garage_app/screens/garage/ShowProductsbought.dart';
 import 'package:garage_app/screens/garage/cart.dart';
@@ -11,12 +12,17 @@ import 'package:garage_app/screens/login.dart';
 import 'package:garage_app/screens/logout.dart';
 import 'package:garage_app/theme/themedata.dart';
 import 'package:garage_app/screens/garage/productPage.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       // systemNavigationBarColor: AppColorSwatche.white,
       statusBarColor: Colors.transparent));
-  runApp(MaterialApp(
+  runApp(
+      MultiProvider(providers: [ChangeNotifierProvider(
+      create: (_) => CartProvider()
+      )],child:
+  MaterialApp(
     theme: ThemeData(
       splashColor: AppColorSwatche.primary,
       colorScheme: ThemeData().colorScheme.copyWith(
@@ -41,5 +47,6 @@ void main() {
       '/purchased_product': (context) => ShowProductbought(),
       '/cust_product': (context) => ProductPage(),
     },
-  ));
+  )));
+
 }

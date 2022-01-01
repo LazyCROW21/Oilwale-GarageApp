@@ -9,7 +9,6 @@ class OfferDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Offer offers = ModalRoute.of(context)!.settings.arguments as Offer;
-
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
