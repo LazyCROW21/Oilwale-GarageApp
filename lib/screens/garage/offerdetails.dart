@@ -12,7 +12,6 @@ class OfferDetails extends StatelessWidget {
         .of(context)!
         .settings
         .arguments as Offer;
-
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -86,10 +85,7 @@ class OfferDetails extends StatelessWidget {
                 Expanded(child: ListView.builder(
                     itemCount: offers.productList.length,
                     itemBuilder: (context, index) {
-
-                      return offers.productList.length <= 0 ?
-                            child! :
-                        OffersProductTile(product: offers.productList[index]);
+                      return OffersProductTile(product: offers.productList[index]);
                     })),
                 SizedBox(
                   height: 10.0,
@@ -117,7 +113,4 @@ class OfferDetails extends StatelessWidget {
       ),
     );
   }
-}
-
-class OffersProductTile {
 }

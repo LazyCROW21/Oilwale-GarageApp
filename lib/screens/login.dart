@@ -41,7 +41,7 @@ class _LoginScreenState extends State<LoginScreen> {
     super.initState();
     SharedPreferences.getInstance().then((SharedPreferences preferences) {
       if (preferences.getString('token') != null) {
-        Navigator.pushNamedAndRemoveUntil(context, '/cust_home',
+        Navigator.pushNamedAndRemoveUntil(context, '/garage_home',
             (Route<dynamic> route) {
           return false;
         });
