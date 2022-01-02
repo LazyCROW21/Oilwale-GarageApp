@@ -3,10 +3,12 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:garage_app/models/product.dart';
 import 'package:garage_app/service/product_api.dart';
 import 'package:garage_app/theme/themedata.dart';
-import 'package:garage_app/widgets/ItemWidget.dart';
+import 'package:garage_app/components/productwidget.dart';
 
 class ProductsPage extends StatelessWidget {
-  const ProductsPage({Key? key,}) : super(key: key);
+  const ProductsPage({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -105,12 +107,12 @@ class _ProductViewState extends State<ProductView> {
             child: isSearching
                 ? loadingRing
                 : ListView.builder(
-                itemCount: _pList.length,
-                itemBuilder: (context, index) {
-                  return ItemWidget(
-                    product: _pList[index],
-                  );
-                }),
+                    itemCount: _pList.length,
+                    itemBuilder: (context, index) {
+                      return ItemWidget(
+                        product: _pList[index],
+                      );
+                    }),
           ),
         ),
       ]),

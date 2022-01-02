@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:garage_app/screens/garage/products.dart';
-import 'package:garage_app/screens/garage/profile.dart';
-import 'package:provider/src/provider.dart';
+import 'package:garage_app/providers/cartprovider.dart';
+import 'package:garage_app/screens/garage/product/products.dart';
+import 'package:garage_app/screens/garage/account/profile.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'Providers/CartProvider.dart';
 import 'home_page.dart';
-import 'offers.dart';
+import 'offer/offers.dart';
 
 class GarageScaffold extends StatefulWidget {
   const GarageScaffold({Key? key}) : super(key: key);
@@ -55,7 +55,8 @@ class _GarageScaffoldState extends State<GarageScaffold> {
       FloatingActionButton(
         elevation: 2.0,
         onPressed: () {
-          Navigator.pushNamed(context, '/cart');
+          Navigator.of(context).pushNamed('/cart');
+          // Navigator.pushNamed(context, '/cart');
         },
         child: Stack(
           children: [
@@ -67,9 +68,7 @@ class _GarageScaffoldState extends State<GarageScaffold> {
                         color: Colors.deepOrange,
                         borderRadius: BorderRadius.circular(6)),
                     child: Text(
-                      "${context
-                          .watch<CartProvider>()
-                          .cartnumprovider}",
+                      "${context.watch<CartProvider>().getCartItemCount}",
                       style: TextStyle(color: Colors.white),
                       textAlign: TextAlign.center,
                     ))),
@@ -86,58 +85,58 @@ class _GarageScaffoldState extends State<GarageScaffold> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         actions: _currentindex == 3
-        ? [
-        PopupMenuButton(
-            onSelected: (result) async {
-              if (result == 0) {
-                Navigator.pushNamed(context, '/garage_history');
-              } else if (result == 1) {
-                Navigator.pushNamed(context, '/garage_home');
-              } else if (result == 2) {
-                SharedPreferences sp = await SharedPreferences.getInstance();
-                sp.clear();
-                Navigator.pushNamedAndRemoveUntil(
-                    context, '/login', ModalRoute.withName('/login'));
-              }
-            },
-            offset: const Offset(0.0, 50.0),
-            icon: Icon(
-              Icons.more_vert,
-              color: Colors.deepOrange,
-            ),
-            color: Colors.grey[300],
-            itemBuilder: (context) =>
-            [
-              PopupMenuItem(
-                  value: 0,
-                  child: Row(
-                    children: [
-                      Icon(
-                        Icons.history_rounded,
-                        color: Colors.deepOrange,
-                      ),
-                      const SizedBox(
-                        width: 7,
-                      ),
-                      Text("Purchase History"),
-                    ],
-                  )),
-              PopupMenuItem(
-                  value: 2,
-                  child: Row(
-                    children: [
-                      Icon(
-                        Icons.logout,
-                        color: Colors.deepOrange,
-                      ),
-                      const SizedBox(
-                        width: 7,
-                      ),
-                      Text("Logout")
-                    ],
-                  ))
-            ])
-        ]
+            ? [
+                PopupMenuButton(
+                    onSelected: (result) async {
+                      if (result == 0) {
+                        Navigator.pushNamed(context, '/garage_history');
+                      } else if (result == 1) {
+                        Navigator.pushNamed(context, '/garage_home');
+                      } else if (result == 2) {
+                        SharedPreferences sp =
+                            await SharedPreferences.getInstance();
+                        sp.clear();
+                        Navigator.pushNamedAndRemoveUntil(
+                            context, '/login', ModalRoute.withName('/login'));
+                      }
+                    },
+                    offset: const Offset(0.0, 50.0),
+                    icon: Icon(
+                      Icons.more_vert,
+                      color: Colors.deepOrange,
+                    ),
+                    color: Colors.grey[300],
+                    itemBuilder: (context) => [
+                          PopupMenuItem(
+                              value: 0,
+                              child: Row(
+                                children: [
+                                  Icon(
+                                    Icons.history_rounded,
+                                    color: Colors.deepOrange,
+                                  ),
+                                  const SizedBox(
+                                    width: 7,
+                                  ),
+                                  Text("Purchase History"),
+                                ],
+                              )),
+                          PopupMenuItem(
+                              value: 2,
+                              child: Row(
+                                children: [
+                                  Icon(
+                                    Icons.logout,
+                                    color: Colors.deepOrange,
+                                  ),
+                                  const SizedBox(
+                                    width: 7,
+                                  ),
+                                  Text("Logout")
+                                ],
+                              ))
+                        ])
+              ]
             : [],
         title: Text(
           "OilWale",

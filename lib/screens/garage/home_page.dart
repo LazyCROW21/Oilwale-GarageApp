@@ -5,11 +5,9 @@ import 'package:garage_app/models/garage.dart';
 import 'package:garage_app/models/offer.dart';
 import 'package:garage_app/service/offer_api.dart';
 import 'package:garage_app/theme/themedata.dart';
-import 'package:garage_app/widgets/GarageOffers.dart';
+import 'package:garage_app/components/garageofferwidget.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import 'globals.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key, required this.gotoOffer}) : super(key: key);
@@ -38,8 +36,7 @@ class _HomePageState extends State<HomePage> {
       address: 'loading ..',
       ownerName: 'loading ..',
       totalScore: 0,
-      garageName: 'loading ..'
-  );
+      garageName: 'loading ..');
 
   bool isLoading = true;
   bool offersEmpty = false;
@@ -48,7 +45,6 @@ class _HomePageState extends State<HomePage> {
     color: AppColorSwatche.primary,
   );
 
-
   @override
   void setState(VoidCallback fn) {
     if (mounted) {
@@ -56,7 +52,7 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
-  void _changed(){
+  void _changed() {
     offersEmpty = true;
   }
 
@@ -67,7 +63,8 @@ class _HomePageState extends State<HomePage> {
       setState(() {
         garage.totalCustomer = garagePreferences.getInt("totalCustomer") ?? 0;
         garage.totalScore = garagePreferences.getInt("totalScore") ?? 0;
-        garage.referralCode = garagePreferences.getString("referralCode") ?? "Not found";
+        garage.referralCode =
+            garagePreferences.getString("referralCode") ?? "Not found";
       });
     });
 
@@ -78,12 +75,12 @@ class _HomePageState extends State<HomePage> {
           offers = _offList[i];
           var dateofCreation = offers.startedAt;
           DateTime tempDate =
-          new DateFormat("yyyy-MM-dd").parse(dateofCreation);
-          if (tempDate.isAfter(dateofOffers)) {
+              new DateFormat("yyyy-MM-dd").parse(dateofCreation);
+          if (tempDate.isAfter(DateTime.now())) {
             _offList.removeAt(i);
           }
         }
-        if(_offList.isEmpty) {
+        if (_offList.isEmpty) {
           _changed();
         }
         custNumber = 500;
@@ -246,27 +243,29 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
-      offersEmpty ?
-      Center(
-        child: Container(
-          padding: EdgeInsets.only(top: 20),
-          child: Text("No Recent Offers at the moment ", style: TextStyle(fontWeight: FontWeight.bold),),
-        ),
-      ) : Container(),
+      offersEmpty
+          ? Center(
+              child: Container(
+                padding: EdgeInsets.only(top: 20),
+                child: Text(
+                  "No Recent Offers at the moment ",
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ),
+            )
+          : Container(),
       Expanded(
         child: isLoading
             ? loadingRing
             : ListView.builder(
-            shrinkWrap: true,
-            itemCount: _offList.length,
-            itemBuilder: (context, index) {
-              return OffersWidget(
-                offers: _offList[index],
-              );
-            }),
+                shrinkWrap: true,
+                itemCount: _offList.length,
+                itemBuilder: (context, index) {
+                  return OffersWidget(
+                    offers: _offList[index],
+                  );
+                }),
       ),
-
-
     ]);
   }
 }

@@ -3,7 +3,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:garage_app/models/offer.dart';
 import 'package:garage_app/service/offer_api.dart';
 import 'package:garage_app/theme/themedata.dart';
-import 'package:garage_app/widgets/GarageOffers.dart';
+import 'package:garage_app/components/garageofferwidget.dart';
 
 class OffersPage extends StatefulWidget {
   const OffersPage({Key? key}) : super(key: key);
@@ -28,9 +28,7 @@ class OffersPageState extends State<OffersPage> {
       super.setState(fn);
     }
   }
-  void _offEmpty(){
-    offersEmpty = true;
-  }
+
   @override
   void initState() {
     super.initState();
@@ -38,7 +36,7 @@ class OffersPageState extends State<OffersPage> {
       setState(() {
         isLoading = false;
         _offList = resp;
-        if(_offList.isEmpty){
+        if (_offList.isEmpty) {
           offersEmpty = true;
         }
       });
@@ -47,26 +45,28 @@ class OffersPageState extends State<OffersPage> {
     });
   }
 
-
   Widget build(BuildContext context) {
     return isLoading
         ? loadingRing
-        :  offersEmpty ?
-    Center(
-      child: Container(
-        padding: EdgeInsets.only(top: 20),
-        child: Text("No Offers at the moment ", style: TextStyle(fontWeight: FontWeight.bold),),
-      ),
-    ) :
-    SingleChildScrollView(
-      child: ListView.builder(
-          shrinkWrap: true,
-          itemCount: _offList.length,
-          itemBuilder: (context, index) {
-            return OffersWidget(
-              offers: _offList[index],
-            );
-          }),
-    );
+        : offersEmpty
+            ? Center(
+                child: Container(
+                  padding: EdgeInsets.only(top: 20),
+                  child: Text(
+                    "No Offers at the moment ",
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                ),
+              )
+            : SingleChildScrollView(
+                child: ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: _offList.length,
+                    itemBuilder: (context, index) {
+                      return OffersWidget(
+                        offers: _offList[index],
+                      );
+                    }),
+              );
   }
 }

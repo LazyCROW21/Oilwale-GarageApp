@@ -1,17 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:garage_app/models/offer.dart';
-import 'package:garage_app/widgets/OffersWidget.dart';
+import 'package:garage_app/components/offerproducttile.dart';
 
 class OfferDetails extends StatelessWidget {
   const OfferDetails({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final Offer offers = ModalRoute
-        .of(context)!
-        .settings
-        .arguments as Offer;
+    final Offer offers = ModalRoute.of(context)!.settings.arguments as Offer;
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -67,11 +64,11 @@ class OfferDetails extends StatelessWidget {
                     children: [
                       Expanded(
                           child: Text(
-                            "Last Date:",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.deepOrangeAccent),
-                          )),
+                        "Last Date:",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.deepOrangeAccent),
+                      )),
                       Expanded(
                         flex: 2,
                         child: Text(offers.endsAt.substring(0, 10)),
@@ -82,11 +79,13 @@ class OfferDetails extends StatelessWidget {
                 SizedBox(
                   height: 30.0,
                 ),
-                Expanded(child: ListView.builder(
-                    itemCount: offers.productList.length,
-                    itemBuilder: (context, index) {
-                      return OffersProductTile(product: offers.productList[index]);
-                    })),
+                Expanded(
+                    child: ListView.builder(
+                        itemCount: offers.productList.length,
+                        itemBuilder: (context, index) {
+                          return OffersProductTile(
+                              product: offers.productList[index]);
+                        })),
                 SizedBox(
                   height: 10.0,
                 ),

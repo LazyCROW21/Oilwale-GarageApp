@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:garage_app/providers/cartprovider.dart';
 import 'package:garage_app/models/product.dart';
-import 'package:garage_app/widgets/CartWidget.dart';
-import 'package:provider/src/provider.dart';
-import 'Providers/CartProvider.dart';
+import 'package:garage_app/components/cartwidget.dart';
+import 'package:provider/provider.dart';
 
 class CartPage extends StatefulWidget {
   const CartPage({Key? key}) : super(key: key);
@@ -12,10 +12,14 @@ class CartPage extends StatefulWidget {
 }
 
 class _CartPageState extends State<CartPage> {
-
+  List<Product> cartProducts = [];
+  @override
+  void initState() {
+    super.initState();
+    cartProducts = context.read<CartProvider>().cartProducts;
+  }
 
   Widget build(BuildContext context) {
-    List<Product> _pList = context.watch<CartProvider>().cartProduct;
     return Scaffold(
         backgroundColor: Colors.grey[200],
         appBar: new AppBar(
@@ -37,21 +41,25 @@ class _CartPageState extends State<CartPage> {
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
                   children: [
-                    Text("Items Purchased :  ${context.watch<CartProvider>().cartnumprovider}"),
+                    Text(
+                        "Items Purchased: ${context.read<CartProvider>().getCartItemCount}"),
                   ],
                 ),
               ),
             ),
-            Container(
-              child: Expanded(
-                child: ListView.builder(
-                    itemCount: _pList.length,
-                    itemBuilder: (context, index) {
-                      return CartWidget(
-                        item: _pList[index],
-                      );
-                    }),
-              ),
+            Consumer<CartProvider>(
+              builder: (BuildContext context, value, Widget? child) {
+                return Expanded(
+                  child: ListView.builder(
+                      itemCount: cartProducts.length, //_pList.length,
+                      itemBuilder: (context, index) {
+                        // return Container();
+                        return CartWidget(
+                          item: cartProducts[index],
+                        );
+                      }),
+                );
+              },
             ),
           ],
         ));
