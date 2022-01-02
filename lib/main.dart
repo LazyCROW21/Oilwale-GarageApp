@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:garage_app/providers/cartprovider.dart';
+import 'package:garage_app/screens/Register.dart';
 import 'package:garage_app/screens/garage/account/purdchasehistory.dart';
 import 'package:garage_app/screens/garage/account/showproductsbought.dart';
 import 'package:garage_app/screens/garage/product/cart.dart';
@@ -50,6 +51,7 @@ class GarageApp extends StatelessWidget {
           '/garage_history': (context) => PurchaseHistory(),
           '/purchased_product': (context) => ShowProductbought(),
           '/cust_product': (context) => ProductDetails(),
+          '/garage_register': (context) => RegistrationWidget()
         },
       ),
     );

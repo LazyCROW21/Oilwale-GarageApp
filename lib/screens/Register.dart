@@ -147,19 +147,20 @@ class _RegistrationWidgetState extends State<RegistrationWidget> {
               ),
               showMssg
                   ? Center(
-                    child: Container(
-                        child: Column(
-                          children: [
-                            Text(
-                              "Thank you for regsistering .",style: TextStyle(color: Colors.deepOrange),
-                            ),
-                            Text(
+                      child: Container(
+                          child: Column(
+                        children: [
+                          Text(
+                            "Thank you for regsistering .",
+                            style: TextStyle(color: Colors.deepOrange),
+                          ),
+                          Text(
                             "You will be soon contacted by us .",
                             style: TextStyle(color: Colors.deepOrange),
-                      ),
-                          ],
-                        )),
-                  )
+                          ),
+                        ],
+                      )),
+                    )
                   : ElevatedButton(
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
