@@ -207,7 +207,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       Divider(),
                       ElevatedButton(
                         onPressed: () {
-                          Navigator.pushNamed(context, '/cust_createAccount');
+                          Navigator.pushNamed(context, '/garage_register');
                         },
                         style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all(

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:garage_app/components/addvehicleform.dart';
+import 'package:garage_app/screens/Register.dart';
 import 'package:garage_app/screens/garage/Providers/CartProvider.dart';
-import 'package:garage_app/screens/garage/PurdchaseHistory.dart';
+import 'package:garage_app/screens/garage/PurchaseHistory.dart';
 import 'package:garage_app/screens/garage/ShowProductsbought.dart';
 import 'package:garage_app/screens/garage/cart.dart';
 import 'package:garage_app/screens/garage/garage_scaffold.dart';
@@ -30,7 +30,6 @@ void main() {
             secondary: AppColorSwatche.primaryAccent,
             brightness: Brightness.light,
           ),
-      // accentColor: AppColorSwatche.primary,
       highlightColor: AppColorSwatche.primary,
     ),
     initialRoute: '/login',
@@ -45,7 +44,8 @@ void main() {
       '/offer_details': (context) => OfferDetails(),
       '/garage_history': (context) => PurchaseHistory(),
       '/purchased_product': (context) => ShowProductbought(),
-      '/cust_product': (context) => ProductPage(),
+      '/cust_product': (context) => ProductDetails(),
+      '/garage_register' : (context) => RegistrationWidget()
     },
   )));
 

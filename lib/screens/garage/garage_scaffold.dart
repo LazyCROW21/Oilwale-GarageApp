@@ -3,7 +3,6 @@ import 'package:garage_app/screens/garage/products.dart';
 import 'package:garage_app/screens/garage/profile.dart';
 import 'package:provider/src/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import 'Providers/CartProvider.dart';
 import 'home_page.dart';
 import 'offers.dart';
@@ -17,6 +16,7 @@ class GarageScaffold extends StatefulWidget {
 
 class _GarageScaffoldState extends State<GarageScaffold> {
   int _currentindex = 0;
+
   void gotoOffers() {
     setState(() {
       _currentindex = 1;
@@ -67,7 +67,9 @@ class _GarageScaffoldState extends State<GarageScaffold> {
                         color: Colors.deepOrange,
                         borderRadius: BorderRadius.circular(6)),
                     child: Text(
-                      "${context.watch<CartProvider>().cartnumprovider}",
+                      "${context
+                          .watch<CartProvider>()
+                          .cartnumprovider}",
                       style: TextStyle(color: Colors.white),
                       textAlign: TextAlign.center,
                     ))),
@@ -86,7 +88,7 @@ class _GarageScaffoldState extends State<GarageScaffold> {
         actions: _currentindex == 3
         ? [
         PopupMenuButton(
-            onSelected:  (result) async {
+            onSelected: (result) async {
               if (result == 0) {
                 Navigator.pushNamed(context, '/garage_history');
               } else if (result == 1) {
@@ -104,7 +106,8 @@ class _GarageScaffoldState extends State<GarageScaffold> {
               color: Colors.deepOrange,
             ),
             color: Colors.grey[300],
-            itemBuilder: (context) => [
+            itemBuilder: (context) =>
+            [
               PopupMenuItem(
                   value: 0,
                   child: Row(
@@ -164,7 +167,4 @@ class _GarageScaffoldState extends State<GarageScaffold> {
       ),
     );
   }
-
-  @override
-  noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
 }

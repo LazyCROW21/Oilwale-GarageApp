@@ -6,12 +6,12 @@ import 'package:garage_app/models/vehicle.dart';
 import 'package:garage_app/service/vehicle_api.dart';
 import 'package:garage_app/theme/themedata.dart';
 
-class ProductPage extends StatefulWidget {
+class ProductDetails extends StatefulWidget {
   @override
-  _ProductPageState createState() => _ProductPageState();
+  _ProductDetailsState createState() => _ProductDetailsState();
 }
 
-class _ProductPageState extends State<ProductPage> {
+class _ProductDetailsState extends State<ProductDetails> {
   Product? product;
   EdgeInsets p1 = EdgeInsets.all(4);
   final TextStyle heading1 = const TextStyle(
