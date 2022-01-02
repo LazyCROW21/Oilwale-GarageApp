@@ -14,7 +14,8 @@ class Order {
         required this.status,
         required this.acceptedAt,
         required this.placedAt
-      });
+      }
+      );
 
   Order.fromJSON(Map<String, dynamic> json)
   {
