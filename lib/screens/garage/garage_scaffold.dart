@@ -1,3 +1,4 @@
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:garage_app/providers/cartprovider.dart';
 import 'package:garage_app/screens/garage/product/products.dart';
@@ -151,26 +152,26 @@ class _GarageScaffoldState extends State<GarageScaffold> {
           children: _children),
       // body: _children[_currentindex],
       floatingActionButton: floatingbtn[_currentindex],
-      bottomNavigationBar: BottomNavigationBar(
-        // backgroundColor: Colors.,
-        selectedItemColor: Colors.deepOrange,
-        unselectedItemColor: Colors.grey,
-        type: BottomNavigationBarType.fixed,
-        // onTap: onTapped,
-        onTap: (int index) {
-          _pageController.animateToPage(index,
-              duration: Duration(milliseconds: 400), curve: Curves.ease);
-        },
-        currentIndex: _currentindex,
-        items: [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.local_offer), label: "Offers"),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.shopping_bag_outlined), label: "Products"),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
-        ],
-      ),
+      bottomNavigationBar: CurvedNavigationBar(
+          height: 60,
+          color: Colors.deepOrangeAccent,
+          backgroundColor: Colors.grey[200] ?? Colors.white,
+          // selectedItemColor: Colors.deepOrange,
+          // unselectedItemColor: Colors.grey,
+          // type: BottomNavigationBarType.fixed,
+          // onTap: onTapped,
+          onTap: (int index) {
+            _pageController.animateToPage(index,
+                duration: Duration(milliseconds: 400), curve: Curves.ease);
+          },
+          // currentIndex: _currentindex,
+          index: _currentindex,
+          items: const <Widget>[
+            Icon(Icons.home, color: Colors.white),
+            Icon(Icons.local_offer, color: Colors.white),
+            Icon(Icons.shopping_bag_outlined, color: Colors.white),
+            Icon(Icons.person, color: Colors.white)
+          ]),
     );
   }
 }
