@@ -42,7 +42,7 @@ class _CartPageState extends State<CartPage> {
                 child: Column(
                   children: [
                     Text(
-                        "Items Purchased: ${context.read<CartProvider>().getCartItemCount}"),
+                        "Items Purchased: ${context.watch<CartProvider>().getCartItemCount}"),
                   ],
                 ),
               ),
