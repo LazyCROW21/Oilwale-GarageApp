@@ -10,10 +10,10 @@ class ShowProductbought extends StatelessWidget {
         centerTitle: true,
         title: Text(
           "Oilwale",
-          style: TextStyle(color: Colors.deepOrange),
+          style: TextStyle(color: Colors.white),
         ),
         leading: BackButton(
-          color: Colors.deepOrange,
+          color: Colors.white,
         ),
       ),
       body: Container(

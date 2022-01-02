@@ -16,6 +16,8 @@ class GarageScaffold extends StatefulWidget {
 
 class _GarageScaffoldState extends State<GarageScaffold> {
   int _currentindex = 0;
+  List<Widget> _children = [];
+  PageController _pageController = PageController(initialPage: 0);
 
   void gotoOffers() {
     setState(() {
@@ -37,9 +39,6 @@ class _GarageScaffoldState extends State<GarageScaffold> {
       Profile()
     ];
   }
-
-  List<Widget> _children = [];
-  final bool showcart = false;
 
   void onTapped(int index) {
     setState(() {
@@ -146,14 +145,22 @@ class _GarageScaffoldState extends State<GarageScaffold> {
         elevation: 0.0,
         backgroundColor: Colors.white,
       ),
-      body: _children[_currentindex],
+      body: PageView(
+          controller: _pageController,
+          onPageChanged: onTapped,
+          children: _children),
+      // body: _children[_currentindex],
       floatingActionButton: floatingbtn[_currentindex],
       bottomNavigationBar: BottomNavigationBar(
         // backgroundColor: Colors.,
         selectedItemColor: Colors.deepOrange,
         unselectedItemColor: Colors.grey,
         type: BottomNavigationBarType.fixed,
-        onTap: onTapped,
+        // onTap: onTapped,
+        onTap: (int index) {
+          _pageController.animateToPage(index,
+              duration: Duration(milliseconds: 400), curve: Curves.ease);
+        },
         currentIndex: _currentindex,
         items: [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
