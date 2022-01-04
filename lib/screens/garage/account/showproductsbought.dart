@@ -1,74 +1,60 @@
 import 'package:flutter/material.dart';
+import 'package:garage_app/components/showproductstile.dart';
+import 'package:garage_app/models/order.dart';
 
 class ShowProductbought extends StatelessWidget {
   ShowProductbought({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    // final Offers offers = ModalRoute.of(context)!.settings.arguments as Offers;
+  final Order order = ModalRoute.of(context)!.settings.arguments as Order;
+
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
         title: Text(
-          "Oilwale",
-          style: TextStyle(color: Colors.deepOrange),
+          "Order Details",
+          style: TextStyle(color: Colors.white),
         ),
         leading: BackButton(
-          color: Colors.deepOrange,
+          color: Colors.white,
         ),
       ),
-      body: Container(
-        margin: EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 16.0),
-        child: Card(
-          elevation: 8.0,
-          child: Container(
-            padding: EdgeInsets.all(10.0),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text(
-                  "",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
+      body: Card(
+        elevation: 8.0,
+        child: Container(
+          padding: EdgeInsets.all(10.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "Order Id - ${order.orderId}",
+                style: TextStyle(fontSize: 12.0, color: Colors.grey[600]),
+              ),
+              SizedBox(height: 5.0,),
+              Divider(height: 4.0,color: Colors.grey[600],),
+              SizedBox(
+                height: 15.0,
+              ),
+              Text("Date and Time of Purchase",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12.0,color: Colors.deepOrange)),
+              SizedBox(
+                height: 5.0,
+              ),
+              Text("${order.placedAt.substring(0,10)}   ${order.placedAt.substring(11,16)}",style: TextStyle(fontSize: 13.0),),
+              SizedBox(
+                height: 20.0,
+              ),
+              Container(
+                child: Expanded(
+                  child: ListView.builder( itemCount: order.productList.length,
+                      itemBuilder: (context, index) {
+                        return ShowProductsTile(
+                          product: order.productList[index],
+                        );
+                      })
                 ),
-                SizedBox(
-                  height: 10.0,
-                ),
-                // Expanded(child: ListView.builder(itemBuilder: (context, index) {
-                //                   ItemWidget(product: product);
-                // }
-                // ))
-                SizedBox(
-                  height: 10.0,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    TextButton(
-                        onPressed: () {
-                          Navigator.pop(context, '/garage_offers');
-                        },
-                        style: TextButton.styleFrom(
-                          backgroundColor: Colors.red[100]!.withOpacity(0.5),
-                        ),
-                        child: Text(
-                          "Decline",
-                          style: TextStyle(color: Colors.red),
-                        )),
-                    TextButton(
-                        onPressed: () {
-                          Navigator.pop(context, '/garage_offers');
-                        },
-                        style: TextButton.styleFrom(
-                          backgroundColor: Colors.green[100]!.withOpacity(0.5),
-                        ),
-                        child: Text(
-                          "Accept",
-                          style: TextStyle(color: Colors.green),
-                        ))
-                  ],
-                )
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

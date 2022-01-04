@@ -2,14 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:garage_app/models/product.dart';
 import 'package:garage_app/theme/themedata.dart';
 
-class OffersProductTile extends StatelessWidget {
+class ShowProductsTile extends StatelessWidget {
   final Product product;
 
-  const OffersProductTile({Key? key, required this.product}) : super(key: key);
+  const ShowProductsTile({Key? key, required this.product}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Card(
+      elevation: 5.0,
+      shadowColor: Colors.black,
       child: Hero(
         tag: ValueKey(product.id),
         child: MaterialButton(
@@ -21,7 +23,6 @@ class OffersProductTile extends StatelessWidget {
               margin: EdgeInsets.symmetric(vertical: 4.0),
               padding: EdgeInsets.all(8.0),
               decoration: BoxDecoration(
-                  color: Colors.white,
                   borderRadius: BorderRadius.all(Radius.circular(8.0))),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -32,8 +33,8 @@ class OffersProductTile extends StatelessWidget {
                         borderRadius: BorderRadius.circular(8.0),
                         child: Image.network(
                           'https://picsum.photos/200',
-                          height: 50,
-                          width: 50,
+                          height: 60,
+                          width: 60,
                         )),
                   ),
                   SizedBox(
@@ -49,7 +50,7 @@ class OffersProductTile extends StatelessWidget {
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
                                     color: Colors.deepOrangeAccent,
-                                    fontSize: 14.0)),
+                                    fontSize: 15.0)),
                             SizedBox(
                               height: 2.0,
                             ),
@@ -57,18 +58,21 @@ class OffersProductTile extends StatelessWidget {
                               children: [
                                 Text('Grade: ',
                                     style: TextStyle(
-                                        color: Colors.grey, fontSize: 12.0)),
+                                        color: Colors.grey, fontSize: 13.0)),
                                 Text(product.grade,
                                     style: TextStyle(
-                                        fontSize: 12.0,
+                                        fontSize: 13.0,
                                         color: AppColorSwatche.primary)),
                               ],
+                            ),
+                            SizedBox(
+                              height: 2.0,
                             ),
                             Text(product.specification,
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
                                     color: AppColorSwatche.grey,
-                                    fontSize: 12.0)),
+                                    fontSize: 13.0)),
                           ],
                         ),
                       )),

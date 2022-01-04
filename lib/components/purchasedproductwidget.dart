@@ -3,18 +3,48 @@ import 'package:flutter/material.dart';
 import 'package:garage_app/models/order.dart';
 
 
-class PurchasedProductWidget extends StatelessWidget {
+class PurchasedProductWidget extends StatefulWidget {
   PurchasedProductWidget({Key? key, required this.orders}) : super(key: key);
   final Order orders;
-  final message = "placed";
-  final Color msgcolor = Colors.grey[900]!.withOpacity(1);
-  final Color bckgrndmsgcolor = Colors.yellowAccent;
+
+  @override
+  State<PurchasedProductWidget> createState() => _PurchasedProductWidgetState();
+}
+
+class _PurchasedProductWidgetState extends State<PurchasedProductWidget> {
+  String message = "placed";
+
+  Color msgcolor = Colors.grey[900]!.withOpacity(1);
+
+  Color backgroundMssgColor = Colors.yellowAccent;
+
+  @override
+  void initState() {
+    super.initState();
+    if(widget.orders.status == 0){
+      backgroundMssgColor = Colors.grey;
+      message = "placed";
+    }
+    else if(widget.orders.status == 1){
+      backgroundMssgColor = Colors.yellow;
+      message ="seen";
+    }
+    else if(widget.orders.status == 2){
+      backgroundMssgColor = Colors.green;
+      message ="accepted";
+    }
+    else{
+      backgroundMssgColor = Colors.black;
+      message = "delivered";
+      msgcolor = Colors.white;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.pushNamed(context, '/purchased_product');
+        Navigator.pushNamed(context, '/purchased_product',arguments: widget.orders);
       },
       child: Container(
           child: Card(
@@ -25,19 +55,20 @@ class PurchasedProductWidget extends StatelessWidget {
                     top: 5.0,
                     right: 5.0,
                     child: Text(
-                      orders.placedAt,
+                      widget.orders.placedAt.substring(0,10),
                       style: TextStyle(fontSize: 12.0),
                     )),
                 Positioned(
-                  top: 15.0,
+                  height: 30,
+                  top: 23.0,
                   right: 10.0,
                   child: TextButton(
                     onPressed: () {},
                     child: Text(
-                      "${orders.status}",
+                      "${message}",
                       style: TextStyle(color: msgcolor),
                     ),
-                    style: TextButton.styleFrom(backgroundColor: bckgrndmsgcolor),
+                    style: TextButton.styleFrom(backgroundColor: backgroundMssgColor),
                   ),
                 ),
                 Container(
@@ -57,7 +88,7 @@ class PurchasedProductWidget extends StatelessWidget {
                         child: Column(
                           children: [
                             Text(
-                              "4 Products Purchased",
+                              "${widget.orders.productList.length} products purchased",
                               style: TextStyle(fontWeight: FontWeight.bold),
                               textAlign: TextAlign.right,
                             ),

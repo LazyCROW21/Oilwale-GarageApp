@@ -125,6 +125,8 @@ class _ProductDetailsState extends State<ProductDetails> {
                         Divider(
                           color: Colors.deepOrange,
                         ),
+                        TextButton(
+                            onPressed: () {}, child: Text("Add to Cart")),
                         Card(
                           elevation: 8.0,
                           margin: EdgeInsets.symmetric(vertical: 4.0),
