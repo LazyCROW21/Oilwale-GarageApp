@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:garage_app/models/product.dart';
 
 class CartProvider with ChangeNotifier {
+
   int _cartItemCount = 0;
   int get getCartItemCount => _cartItemCount;
   List<Product> cartProducts = [];
@@ -32,8 +33,7 @@ class CartProvider with ChangeNotifier {
   }
   void clearCartProductList() {
     cartProducts.clear();
-  }
-  void clearCartItemCount(){
-    _cartItemCount = 0 ;
+    _cartItemCount = 0;
+    notifyListeners();
   }
 }

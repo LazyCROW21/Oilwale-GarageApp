@@ -22,12 +22,6 @@ class _CartPageState extends State<CartPage> {
 
 
   Widget build(BuildContext context) {
-    void _changed() {
-      setState(() {
-        context.read<CartProvider>().clearCartProductList();
-        context.read<CartProvider>().clearCartItemCount();
-      });
-    }
     return Scaffold(
         backgroundColor: Colors.grey[200],
         appBar: new AppBar(
@@ -75,7 +69,9 @@ class _CartPageState extends State<CartPage> {
                 child: Container(
                   padding: EdgeInsets.all(10.0),
                   child: ElevatedButton(
-              onPressed: _changed,
+              onPressed: () {
+                context.read<CartProvider>().clearCartProductList();
+              },
               child: Text("Place Order"),
             ),
                 ))

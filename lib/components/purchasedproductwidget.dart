@@ -29,7 +29,7 @@ class _PurchasedProductWidgetState extends State<PurchasedProductWidget> {
       backgroundMssgColor = Colors.green;
       message ="accepted";
     }
-    else if(widget.orders.status == 2 && widget.orders.status ==3){
+    else if(widget.orders.status == 2 || widget.orders.status == 3){
       backgroundMssgColor = Colors.grey;
       message ="delivered";
     }

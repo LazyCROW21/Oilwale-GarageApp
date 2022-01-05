@@ -3,16 +3,16 @@ import 'package:garage_app/models/product.dart';
 import 'package:provider/provider.dart';
 import 'package:garage_app/providers/cartprovider.dart';
 
-class ItemWidget extends StatefulWidget {
+class ProductWidget extends StatefulWidget {
   final Product product;
 
-  ItemWidget({Key? key, required this.product}) : super(key: key);
+  ProductWidget({Key? key, required this.product}) : super(key: key);
 
   @override
-  State<ItemWidget> createState() => _ItemWidgetState();
+  State<ProductWidget> createState() => _ProductWidgetState();
 }
 
-class _ItemWidgetState extends State<ItemWidget> {
+class _ProductWidgetState extends State<ProductWidget> {
   var btnText = "Add to Cart";
   bool inCart = false;
   Color addToBtnBGColor = Colors.deepOrange[200]!.withOpacity(.3);

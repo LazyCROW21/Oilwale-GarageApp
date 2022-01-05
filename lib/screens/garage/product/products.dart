@@ -109,7 +109,7 @@ class _ProductViewState extends State<ProductView> {
                 : ListView.builder(
                     itemCount: _pList.length,
                     itemBuilder: (context, index) {
-                      return ItemWidget(
+                      return ProductWidget(
                         product: _pList[index],
                       );
                     }),
