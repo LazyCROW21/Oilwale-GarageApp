@@ -3,8 +3,10 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:garage_app/models/product.dart';
 import 'package:garage_app/models/vehicle.dart';
+import 'package:garage_app/providers/cartprovider.dart';
 import 'package:garage_app/service/vehicle_api.dart';
 import 'package:garage_app/theme/themedata.dart';
+import 'package:provider/src/provider.dart';
 
 class ProductDetails extends StatefulWidget {
   @override
@@ -26,6 +28,11 @@ class _ProductDetailsState extends State<ProductDetails> {
     'https://picsum.photos/200',
     'https://picsum.photos/200'
   ];
+
+
+  String mssg = "Add to Cart";
+  Color btnColor = Colors.deepOrange[200]!.withOpacity(.3);
+  Color mssgColor = Colors.deepOrange;
 
   List<Vehicle> recommendedVehicles = [];
   bool isLoadingVList = true;
@@ -54,6 +61,13 @@ class _ProductDetailsState extends State<ProductDetails> {
 
   @override
   Widget build(BuildContext context) {
+    if(!isLoadingVList) {
+      if (context.read<CartProvider>().checkProductInCart(product!)) {
+        mssg = "In Cart";
+        btnColor = Colors.green[200]!.withOpacity(.3);
+        mssgColor = Colors.black;
+      }
+    }
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.deepOrangeAccent,
@@ -126,7 +140,32 @@ class _ProductDetailsState extends State<ProductDetails> {
                           color: Colors.deepOrange,
                         ),
                         TextButton(
-                            onPressed: () {}, child: Text("Add to Cart")),
+                          onPressed: () {
+                            setState(() {
+                              if (context
+                                  .read<CartProvider>()
+                                  .checkProductInCart(product!)) {
+                                context
+                                    .read<CartProvider>()
+                                    .removeProduct(product!);
+                                mssgColor = Colors.deepOrange;
+                                mssg = "Add to Cart";
+                                btnColor =
+                                    Colors.deepOrange[200]!.withOpacity(.3);
+                              } else {
+                                context
+                                    .read<CartProvider>()
+                                    .addProduct(product!);
+                                mssgColor = Colors.black;
+                                btnColor = Colors.green[200]!.withOpacity(.3);
+                                mssg = "In Cart";
+                              }
+                            });
+                          },
+                          style:
+                              TextButton.styleFrom(backgroundColor: btnColor),
+                          child: Text(mssg,style: TextStyle(color: mssgColor),),
+                        ),
                         Card(
                           elevation: 8.0,
                           margin: EdgeInsets.symmetric(vertical: 4.0),

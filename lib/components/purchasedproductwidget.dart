@@ -22,20 +22,25 @@ class _PurchasedProductWidgetState extends State<PurchasedProductWidget> {
   void initState() {
     super.initState();
     if(widget.orders.status == 0){
-      backgroundMssgColor = Colors.grey;
+      backgroundMssgColor = Colors.yellow;
       message = "placed";
     }
     else if(widget.orders.status == 1){
-      backgroundMssgColor = Colors.yellow;
-      message ="seen";
-    }
-    else if(widget.orders.status == 2){
       backgroundMssgColor = Colors.green;
       message ="accepted";
     }
-    else{
+    else if(widget.orders.status == 2 && widget.orders.status ==3){
+      backgroundMssgColor = Colors.grey;
+      message ="delivered";
+    }
+    else if(widget.orders.status == 4){
       backgroundMssgColor = Colors.black;
-      message = "delivered";
+      message = "not accepted";
+      msgcolor = Colors.white;
+    }
+    else {
+      backgroundMssgColor = Colors.black;
+      message ="deleted";
       msgcolor = Colors.white;
     }
   }
@@ -47,6 +52,7 @@ class _PurchasedProductWidgetState extends State<PurchasedProductWidget> {
         Navigator.pushNamed(context, '/purchased_product',arguments: widget.orders);
       },
       child: Container(
+        padding: EdgeInsets.all(5.0),
           child: Card(
             elevation: 2.0,
             child: Stack(
@@ -65,7 +71,7 @@ class _PurchasedProductWidgetState extends State<PurchasedProductWidget> {
                   child: TextButton(
                     onPressed: () {},
                     child: Text(
-                      "${message}",
+                      message,
                       style: TextStyle(color: msgcolor),
                     ),
                     style: TextButton.styleFrom(backgroundColor: backgroundMssgColor),

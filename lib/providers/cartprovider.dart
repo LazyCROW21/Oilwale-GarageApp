@@ -34,7 +34,7 @@ class CartProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  bool checkProductInChart(Product product) {
+  bool checkProductInCart(Product product) {
     if (cartProducts.indexWhere((element) => product.id == element.id) == -1) {
       return false;
     }

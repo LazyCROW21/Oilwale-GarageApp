@@ -27,7 +27,7 @@ class _ItemWidgetState extends State<ItemWidget> {
   @override
   Widget build(BuildContext context) {
     inCart = context.select((CartProvider cartprovider) {
-      return cartprovider.checkProductInChart(widget.product);
+      return cartprovider.checkProductInCart(widget.product);
     });
     return InkWell(
       onTap: () {
@@ -100,7 +100,7 @@ class _ItemWidgetState extends State<ItemWidget> {
                                   setState(() {
                                     if (context
                                         .read<CartProvider>()
-                                        .checkProductInChart(widget.product)) {
+                                        .checkProductInCart(widget.product)) {
                                       inCart = true;
                                       context
                                           .read<CartProvider>()
