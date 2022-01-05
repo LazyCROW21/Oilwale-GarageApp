@@ -93,8 +93,8 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  _HomePageState(Function jabadaba) {
-    this.gotoOffer = jabadaba;
+  _HomePageState(Function gotoOffer) {
+    this.gotoOffer = gotoOffer;
   }
 
   bool showoffers = false;
@@ -134,7 +134,7 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                         Container(
-                          padding: EdgeInsets.fromLTRB(30.0, 40.0, 5.0, 18.0),
+                          padding: EdgeInsets.fromLTRB(43.0, 40.0, 5.0, 18.0),
                           child: Text(
                             "${garage.totalCustomer}",
                             style: TextStyle(

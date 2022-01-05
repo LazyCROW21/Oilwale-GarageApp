@@ -23,6 +23,8 @@ class _GarageScaffoldState extends State<GarageScaffold> {
   void gotoOffers() {
     setState(() {
       _currentindex = 1;
+      _pageController.animateToPage(_currentindex,
+          duration: Duration(milliseconds: 400), curve: Curves.ease);
     });
   }
 
@@ -56,7 +58,6 @@ class _GarageScaffoldState extends State<GarageScaffold> {
         elevation: 2.0,
         onPressed: () {
           Navigator.of(context).pushNamed('/cart');
-          // Navigator.pushNamed(context, '/cart');
         },
         child: Stack(
           children: [
@@ -156,15 +157,11 @@ class _GarageScaffoldState extends State<GarageScaffold> {
           height: 60,
           color: Colors.deepOrangeAccent,
           backgroundColor: Colors.grey[200] ?? Colors.white,
-          // selectedItemColor: Colors.deepOrange,
-          // unselectedItemColor: Colors.grey,
-          // type: BottomNavigationBarType.fixed,
-          // onTap: onTapped,
+
           onTap: (int index) {
             _pageController.animateToPage(index,
                 duration: Duration(milliseconds: 400), curve: Curves.ease);
           },
-          // currentIndex: _currentindex,
           index: _currentindex,
           items: const <Widget>[
             Icon(Icons.home, color: Colors.white),

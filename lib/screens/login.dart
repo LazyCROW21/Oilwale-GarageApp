@@ -56,11 +56,6 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        // appBar: AppBar(
-        //   systemOverlayStyle: SystemUiOverlayStyle(
-        //       systemNavigationBarColor: AppColorSwatche.white,
-        //       statusBarColor: AppColorSwatche.white),
-        // ),
         body: Container(
       padding: EdgeInsets.all(36.0),
       child: Center(

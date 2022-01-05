@@ -15,33 +15,36 @@ class PurchaseHistory extends StatefulWidget {
 class _PurchaseHistoryState extends State<PurchaseHistory> {
   late Order orders;
   List<Order> _orderList = [];
-  String garageId = "61863f8db7dfe30566f20103";
+  String garageId = "";
   late SharedPreferences sp;
   bool _orderEmpty = false;
 
   // void callb() async{
-  //   SharedPreferences.getInstance().then((garagePreference) {
-  //     setState(()
-  //     {
-  //       garageId = garagePreference.getString("garageId") ?? "Not found";
-  //       print(garageId);
-  //     }) ;} );
+  //
+  //
+  //     } );
   // }
 
   @override
   void initState() {
     super.initState();
-    OrderAPIManager.getGarageOrders(garageId).then((resp) {
-      setState(() {
-        _orderList = resp;
-        if (_orderList.isEmpty) {
-          _orderEmpty = true;
+    SharedPreferences.getInstance().then((garagePreference) {
+      garageId = garagePreference.getString("garageId") ?? "Not found";
+
+      OrderAPIManager.getGarageOrders(garageId).then((resp) {
+        setState(() {
+          _orderList = resp;
+          if (_orderList.isEmpty) {
+            _orderEmpty = true;
+          }
         }
-      }
-          );
-    }).onError((error, stackTrace) {
-      print(error);
-    });
+        );
+      }).onError((error, stackTrace) {
+        print(error);
+      });
+    }
+      );
+
   }
 
   @override

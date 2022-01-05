@@ -94,7 +94,7 @@ class _PurchasedProductWidgetState extends State<PurchasedProductWidget> {
                         child: Column(
                           children: [
                             Text(
-                              "${widget.orders.productList.length} products purchased",
+                              "${widget.orders.productList.length} products",
                               style: TextStyle(fontWeight: FontWeight.bold),
                               textAlign: TextAlign.right,
                             ),
