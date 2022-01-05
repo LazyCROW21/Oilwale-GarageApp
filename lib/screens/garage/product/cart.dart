@@ -13,13 +13,21 @@ class CartPage extends StatefulWidget {
 
 class _CartPageState extends State<CartPage> {
   List<Product> cartProducts = [];
+
   @override
   void initState() {
     super.initState();
     cartProducts = context.read<CartProvider>().cartProducts;
   }
 
+
   Widget build(BuildContext context) {
+    void _changed() {
+      setState(() {
+        context.read<CartProvider>().clearCartProductList();
+        context.read<CartProvider>().clearCartItemCount();
+      });
+    }
     return Scaffold(
         backgroundColor: Colors.grey[200],
         appBar: new AppBar(
@@ -50,6 +58,7 @@ class _CartPageState extends State<CartPage> {
             Consumer<CartProvider>(
               builder: (BuildContext context, value, Widget? child) {
                 return Expanded(
+                  flex: 10,
                   child: ListView.builder(
                       itemCount: cartProducts.length, //_pList.length,
                       itemBuilder: (context, index) {
@@ -61,6 +70,15 @@ class _CartPageState extends State<CartPage> {
                 );
               },
             ),
+            Expanded(
+              flex: 1,
+                child: Container(
+                  padding: EdgeInsets.all(10.0),
+                  child: ElevatedButton(
+              onPressed: _changed,
+              child: Text("Place Order"),
+            ),
+                ))
           ],
         ));
   }

@@ -6,16 +6,6 @@ class CartProvider with ChangeNotifier {
   int get getCartItemCount => _cartItemCount;
   List<Product> cartProducts = [];
 
-  // void increment() {
-  //   _cartItemCount++;
-  //   notifyListeners();
-  // }
-
-  // void decrement() {
-  //   if (_cartItemCount > 0) _cartItemCount--;
-  //   notifyListeners();
-  // }
-
   void removeProduct(Product deleteProduct) {
     if (_cartItemCount <= 0) {
       return;
@@ -39,5 +29,11 @@ class CartProvider with ChangeNotifier {
       return false;
     }
     return true;
+  }
+  void clearCartProductList() {
+    cartProducts.clear();
+  }
+  void clearCartItemCount(){
+    _cartItemCount = 0 ;
   }
 }
