@@ -4,16 +4,16 @@ class Order {
   late String orderId;
   late List<Product> productList;
   late int status;
-  late String placedAt;
-  late String acceptedAt;
+  late String? placedAt;
+  late String? acceptedAt;
 
   Order(
       {
         required this.orderId,
         required this.productList,
         required this.status,
-        required this.acceptedAt,
-        required this.placedAt
+        this.acceptedAt,
+        this.placedAt
       }
       );
 

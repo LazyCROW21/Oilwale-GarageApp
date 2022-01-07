@@ -13,14 +13,26 @@ class CartProvider with ChangeNotifier {
     }
     cartProducts.removeWhere((element) => deleteProduct.id == element.id);
     _cartItemCount--;
+    deleteProduct.qty =0;
     notifyListeners();
   }
 
+  void addQty(Product product){
+    int c = cartProducts.indexOf(product);
+    cartProducts[c].qty = cartProducts[c].qty! + 1;
+    notifyListeners();
+  }
+  void decreaseQty(Product product){
+    int c = cartProducts.indexOf(product);
+    cartProducts[c].qty = cartProducts[c].qty! - 1;
+    notifyListeners();
+  }
   void addProduct(Product product) {
     if (-1 != cartProducts.indexWhere((element) => product.id == element.id)) {
       return;
     }
     cartProducts.add(product);
+    product.qty=1;
     _cartItemCount++;
     notifyListeners();
   }

@@ -34,6 +34,7 @@ class _PurchaseHistoryState extends State<PurchaseHistory> {
       OrderAPIManager.getGarageOrders(garageId).then((resp) {
         setState(() {
           _orderList = resp;
+          _orderList = _orderList.reversed.toList();
           if (_orderList.isEmpty) {
             _orderEmpty = true;
           }

@@ -61,7 +61,7 @@ class _PurchasedProductWidgetState extends State<PurchasedProductWidget> {
                     top: 5.0,
                     right: 5.0,
                     child: Text(
-                      widget.orders.placedAt.substring(0,10),
+                      widget.orders.placedAt != null ? widget.orders.placedAt!.substring(0,10)  : " koi bhi date " ,
                       style: TextStyle(fontSize: 12.0),
                     )),
                 Positioned(

@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:garage_app/providers/cartprovider.dart';
 import 'package:garage_app/models/product.dart';
 import 'package:garage_app/components/cartwidget.dart';
+import 'package:garage_app/service/order_api.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class CartPage extends StatefulWidget {
   const CartPage({Key? key}) : super(key: key);
@@ -14,14 +16,24 @@ class CartPage extends StatefulWidget {
 class _CartPageState extends State<CartPage> {
   List<Product> cartProducts = [];
 
-  @override
-  void initState() {
-    super.initState();
-    cartProducts = context.read<CartProvider>().cartProducts;
-  }
+
+
 
 
   Widget build(BuildContext context) {
+
+      cartProducts = context.read<CartProvider>().cartProducts;
+    Map<String,int> map12 ={};
+      setState(() {
+        map12 = Map.fromIterable(cartProducts, key: (product) => product.id, value: (product) => product!.qty);
+      });
+
+    late String garageId;
+
+    SharedPreferences.getInstance().then((garagePreference) {
+      garageId = garagePreference.getString("garageId") ?? "Not found";
+    });
+
     return Scaffold(
         backgroundColor: Colors.grey[200],
         appBar: new AppBar(
@@ -69,7 +81,8 @@ class _CartPageState extends State<CartPage> {
                 child: Container(
                   padding: EdgeInsets.all(10.0),
                   child: ElevatedButton(
-              onPressed: () {
+              onPressed: () async{
+                await OrderAPIManager.postOrderAccept(garageId, map12);
                 context.read<CartProvider>().clearCartProductList();
               },
               child: Text("Place Order"),

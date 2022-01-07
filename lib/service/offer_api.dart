@@ -76,4 +76,40 @@ class OffersAPIManager {
     }
     return offers;
   }
+
+  static Future<bool> OfferAccept(bool accepted, String garageId,String schemeId) async {
+    try {
+      String urlStr = base_url + "/scheme/accept";
+      Map<String, dynamic> offerAcceptData = {
+        'accepted': accepted,
+        'garageId': garageId,
+        'schemeId': schemeId,
+      };
+      String dataString = jsonEncode(offerAcceptData);
+      var client = http.Client();
+      var url = Uri.parse(urlStr);
+      print(dataString);
+      var response = await client.post(url,
+          body: dataString, headers: {'Content-Type': 'application/json'});
+      if (response.statusCode == 200) {
+        var jsonString = response.body;
+        Map<String, dynamic> jsonMap = jsonDecode(jsonString);
+        print(jsonMap);
+        // Garage garagedetail =
+        // await GarageAPIManager.getGarageForLogin(jsonMap['id']);
+        // SharedPreferences preferences = await SharedPreferences.getInstance();
+        // preferences.setString('token', jsonMap['token']);
+        // preferences.setString('role', 'garage');
+        // print(garagedetail);
+        return true;
+      } else {
+        return false;
+      }
+    } catch (e, s) {
+      print("Exception $e");
+      print("StackTrace $s");
+    }
+    return false;
+  }
+
 }

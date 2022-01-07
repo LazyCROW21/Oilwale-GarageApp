@@ -54,17 +54,6 @@ class _CartWidgetState extends State<CartWidget> {
                       SizedBox(
                         height: 5.0,
                       ),
-                      // Container(
-                      //   width: 175.0,
-                      //   child: Text(
-                      //     widget.item.specification,
-                      //     textAlign: TextAlign.left,
-                      //     style: TextStyle(
-                      //       fontSize: 12.0,
-                      //       color: Colors.grey[600],
-                      //     ),
-                      //   ),
-                      // ),
                       Container(
                         child: Text(
                           "volume : ${widget.item.packingSize}",
@@ -85,6 +74,7 @@ class _CartWidgetState extends State<CartWidget> {
                                       child: TextButton(
                                     onPressed: () {
                                       setState(() {
+                                          context.read<CartProvider>().decreaseQty(widget.item);
                                         if (count > 1) count--;
                                       });
                                     },
@@ -102,6 +92,7 @@ class _CartWidgetState extends State<CartWidget> {
                                     child: TextButton(
                                         onPressed: () {
                                           setState(() {
+                                            context.read<CartProvider>().addQty(widget.item);
                                             count++;
                                           });
                                         },

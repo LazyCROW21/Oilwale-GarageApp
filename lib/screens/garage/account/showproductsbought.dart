@@ -7,7 +7,7 @@ class ShowProductbought extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-  final Order order = ModalRoute.of(context)!.settings.arguments as Order;
+    final Order order = ModalRoute.of(context)!.settings.arguments as Order;
 
     return Scaffold(
       appBar: AppBar(
@@ -31,28 +31,40 @@ class ShowProductbought extends StatelessWidget {
                 "Order Id - ${order.orderId}",
                 style: TextStyle(fontSize: 12.0, color: Colors.grey[600]),
               ),
-              SizedBox(height: 5.0,),
-              Divider(height: 4.0,color: Colors.grey[600],),
-              SizedBox(
-                height: 15.0,
-              ),
-              Text("Date and Time of Purchase",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12.0,color: Colors.deepOrange)),
               SizedBox(
                 height: 5.0,
               ),
-              Text("${order.placedAt.substring(0,10)}   ${order.placedAt.substring(11,16)}",style: TextStyle(fontSize: 13.0),),
+              Divider(
+                height: 4.0,
+                color: Colors.grey[600],
+              ),
+              SizedBox(
+                height: 15.0,
+              ),
+              Text("Date and Time of Purchase",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 12.0,
+                      color: Colors.deepOrange)),
+              SizedBox(
+                height: 5.0,
+              ),
+              Text(
+                "${order.placedAt != null ? order.placedAt!.substring(0, 10) : "koi bhi date"}   ${order.placedAt != null ? order.placedAt!.substring(11, 16) : "koi bhi time"}",
+                style: TextStyle(fontSize: 13.0),
+              ),
               SizedBox(
                 height: 20.0,
               ),
               Container(
                 child: Expanded(
-                  child: ListView.builder( itemCount: order.productList.length,
-                      itemBuilder: (context, index) {
-                        return ShowProductsTile(
-                          product: order.productList[index],
-                        );
-                      })
-                ),
+                    child: ListView.builder(
+                        itemCount: order.productList.length,
+                        itemBuilder: (context, index) {
+                          return ShowProductsTile(
+                            product: order.productList[index],
+                          );
+                        })),
               ),
             ],
           ),

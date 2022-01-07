@@ -5,6 +5,7 @@ class Product {
   late final String specification;
   late final String packingSize;
   late final String? image;
+  late int? qty;
 
   Product(
       {required this.id,
@@ -12,7 +13,8 @@ class Product {
       required this.grade,
       required this.specification,
       required this.packingSize,
-      this.image});
+      this.image,
+      this.qty});
 
   Product.fromJSON(Map<String, dynamic> json) {
     this.id = json['productId'];
@@ -21,5 +23,6 @@ class Product {
     this.specification = json['specification'];
     this.packingSize = json['packingSize'];
     this.image = json['productImage'];
+    this.qty = json['qty'];
   }
 }

@@ -2,12 +2,21 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:garage_app/models/offer.dart';
 import 'package:garage_app/components/showproductstile.dart';
+import 'package:garage_app/service/offer_api.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class OfferDetails extends StatelessWidget {
   const OfferDetails({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+
+    late String garageId;
+
+    SharedPreferences.getInstance().then((garagePreference) {
+       garageId = garagePreference.getString("garageId") ?? "Not found";
+    });
+
     final Offer offers = ModalRoute.of(context)!.settings.arguments as Offer;
     return Scaffold(
       backgroundColor: Colors.white,
@@ -91,7 +100,8 @@ class OfferDetails extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   TextButton(
-                      onPressed: () {
+                      onPressed: () async {
+                        await OffersAPIManager.OfferAccept(true, garageId, offers.schemeId);
                         Navigator.pop(context, '/garage_offers');
                       },
                       style: TextButton.styleFrom(
