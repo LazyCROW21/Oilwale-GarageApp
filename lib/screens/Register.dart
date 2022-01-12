@@ -142,7 +142,7 @@ class _RegistrationWidgetState extends State<RegistrationWidget> {
                             },
                             validator: (value) {
                               if (value == null || value.isEmpty) {
-                                return 'Please enter Address ';
+                                return 'Please enter Address';
                               }
                               return null;
                             },
