@@ -36,7 +36,6 @@ class GarageApp extends StatelessWidget {
                 secondary: AppColorSwatche.primaryAccent,
                 brightness: Brightness.light,
               ),
-          // accentColor: AppColorSwatche.primary,
           highlightColor: AppColorSwatche.primary,
         ),
         initialRoute: '/login',
