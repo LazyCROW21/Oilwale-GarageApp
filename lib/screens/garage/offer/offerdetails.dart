@@ -1,23 +1,64 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:garage_app/models/offer.dart';
 import 'package:garage_app/components/showproductstile.dart';
 import 'package:garage_app/service/offer_api.dart';
+import 'package:garage_app/theme/themedata.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class OfferDetails extends StatelessWidget {
+class OfferDetails extends StatefulWidget {
   const OfferDetails({Key? key}) : super(key: key);
+
+  @override
+  State<OfferDetails> createState() => _OfferDetailsState();
+}
+
+class _OfferDetailsState extends State<OfferDetails> {
+
+  SpinKitRing loadingRing = SpinKitRing(
+    size: 20.0,
+    color: AppColorSwatche.primaryGreen,
+  );
+  bool isloading = true;
+  @override
+  void setState(VoidCallback fn) {
+    if (mounted) {
+      super.setState(fn);
+    }
+  }
+
+  late String garageId ;
+
+  bool isOfferAccepted = false;
+
+  var message = "Accept";
+
+  late Offer offers ;
+
+  @override
+  void initState() {
+    super.initState();
+    SharedPreferences.getInstance().then((garagePreference) {
+      garageId = garagePreference.getString("garageId") ?? "Not found";
+      OffersAPIManager.isOfferAccepted(garageId, offers.schemeId).then((resp) {
+        setState(() {
+          isOfferAccepted = resp;
+          isloading = false;
+          if(isOfferAccepted)
+            message = " Accepted ";
+        });
+      }).onError((error, stackTrace) {
+        print(error);
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
 
-    late String garageId;
+     offers = ModalRoute.of(context)!.settings.arguments as Offer;
 
-    SharedPreferences.getInstance().then((garagePreference) {
-       garageId = garagePreference.getString("garageId") ?? "Not found";
-    });
-
-    final Offer offers = ModalRoute.of(context)!.settings.arguments as Offer;
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -101,14 +142,17 @@ class OfferDetails extends StatelessWidget {
                 children: [
                   TextButton(
                       onPressed: () async {
-                        await OffersAPIManager.OfferAccept(true, garageId, offers.schemeId);
-                        Navigator.pop(context, '/garage_offers');
+                        if(!isOfferAccepted) {
+                          await OffersAPIManager.offerAccept(
+                              true, garageId, offers.schemeId);
+                          Navigator.pop(context, '/garage_offers');
+                        }
                       },
                       style: TextButton.styleFrom(
                         backgroundColor: Colors.green[100]!.withOpacity(0.5),
                       ),
-                      child: Text(
-                        "Accept",
+                      child: isloading ? loadingRing :Text(
+                        message,
                         style: TextStyle(color: Colors.green),
                       ))
                 ],

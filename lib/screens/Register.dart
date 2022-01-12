@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class RegistrationWidget extends StatefulWidget {
   RegistrationWidget({Key? key}) : super(key: key);
@@ -12,14 +13,20 @@ class _RegistrationWidgetState extends State<RegistrationWidget> {
   bool showMssg = false;
   final _formKey = GlobalKey<FormState>();
 
+
   void _changed() {
-    setState(() {
+    setState(() async {
       showMssg = true;
     });
   }
-
+  late String garageId;
   @override
   Widget build(BuildContext context) {
+
+    SharedPreferences.getInstance().then((garagePreference) {
+      garageId = garagePreference.getString("garageId") ?? "Not found";
+    });
+
     late final String number;
     return Scaffold(
       appBar: AppBar(
@@ -162,9 +169,9 @@ class _RegistrationWidgetState extends State<RegistrationWidget> {
                       )),
                     )
                   : ElevatedButton(
-                      onPressed: () {
+                      onPressed: () async {
                         if (_formKey.currentState!.validate()) {
-                          _changed();
+                          // await postnewGarageApiManager;
                         }
                       },
                       child: Text("Submit")),

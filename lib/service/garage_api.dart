@@ -74,7 +74,6 @@ class GarageAPIManager {
         Garage garage = Garage.fromJSON(jsonMap);
         SharedPreferences preferences = await SharedPreferences.getInstance();
 
-        // store in preferences
         try {
           preferences.setString('garageId', jsonMap['garageId']);
           preferences.setString('garageName', jsonMap['garageName']);

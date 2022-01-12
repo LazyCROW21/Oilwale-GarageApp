@@ -15,11 +15,6 @@ class CartPage extends StatefulWidget {
 
 class _CartPageState extends State<CartPage> {
   List<Product> cartProducts = [];
-
-
-
-
-
   Widget build(BuildContext context) {
 
       cartProducts = context.read<CartProvider>().cartProducts;

@@ -1,10 +1,12 @@
 import 'dart:convert';
+import 'package:flutter/material.dart';
 import 'package:garage_app/models/offer.dart';
 import 'package:http/http.dart' as http;
 
 const String base_url = "https://oilwale.herokuapp.com/api";
 
 class OffersAPIManager {
+
   // return list of Offers on success or false on error
   static Future<dynamic> getAllActiveScheme() async {
     List<Offer> offers = [];
@@ -77,7 +79,29 @@ class OffersAPIManager {
     return offers;
   }
 
-  static Future<bool> OfferAccept(bool accepted, String garageId,String schemeId) async {
+  static Future<bool> isOfferAccepted (String garageId, String schemeId) async  {
+    try {
+      var client = http.Client();
+      String urlStr = base_url + "/scheme/schemeId/GarageId/"+ Uri.encodeComponent(schemeId) +
+      "/" + Uri.encodeComponent(garageId);
+      var url = Uri.parse(urlStr);
+      var response = await client.get(url);
+      if (response.statusCode == 200) {
+        var jsonString = response.body;
+        Map<String, dynamic> jsonMap = jsonDecode(jsonString);
+        print(jsonMap);
+        return jsonMap["isAccepted"];
+      }else {
+        return false;
+      }
+    } catch (e, s) {
+      print("Exception $e");
+      print("StackTrace $s");
+    }
+    return false;
+  }
+
+  static Future<bool> offerAccept(bool accepted, String garageId,String schemeId) async {
     try {
       String urlStr = base_url + "/scheme/accept";
       Map<String, dynamic> offerAcceptData = {
@@ -95,12 +119,6 @@ class OffersAPIManager {
         var jsonString = response.body;
         Map<String, dynamic> jsonMap = jsonDecode(jsonString);
         print(jsonMap);
-        // Garage garagedetail =
-        // await GarageAPIManager.getGarageForLogin(jsonMap['id']);
-        // SharedPreferences preferences = await SharedPreferences.getInstance();
-        // preferences.setString('token', jsonMap['token']);
-        // preferences.setString('role', 'garage');
-        // print(garagedetail);
         return true;
       } else {
         return false;

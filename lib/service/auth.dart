@@ -26,12 +26,12 @@ class AuthManager {
         var jsonString = response.body;
         Map<String, dynamic> jsonMap = jsonDecode(jsonString);
         print(jsonMap);
-        Garage garagedetail =
+        Garage garageDetail =
             await GarageAPIManager.getGarageForLogin(jsonMap['id']);
         SharedPreferences preferences = await SharedPreferences.getInstance();
         preferences.setString('token', jsonMap['token']);
         preferences.setString('role', 'garage');
-        print(garagedetail);
+        print(garageDetail);
         return true;
       } else {
         return false;
