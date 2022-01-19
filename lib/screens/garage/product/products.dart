@@ -31,6 +31,9 @@ class _ProductViewState extends State<ProductView> {
     color: AppColorSwatche.primary,
   );
   bool isSearching = true;
+  String searchQry = "";
+  DateTime lastInp = DateTime.now();
+  bool searchAgain = false;
 
   @override
   void setState(VoidCallback fn) {
@@ -52,6 +55,35 @@ class _ProductViewState extends State<ProductView> {
     });
   }
 
+  void buildProductList() {
+    String currentStr = searchQry;
+    print('At call: ' + searchQry);
+    setState(() {
+      isSearching = true;
+    });
+    if (searchQry == "") {
+      ProductAPIManager.getAllProducts().then((_result) {
+        setState(() {
+          _pList = _result;
+          isSearching = false;
+        });
+        if (currentStr != searchQry) {
+          buildProductList();
+        }
+      });
+    } else {
+      ProductAPIManager.searchProduct(searchQry).then((_result) {
+        setState(() {
+          _pList = _result;
+          isSearching = false;
+        });
+        if (currentStr != searchQry) {
+          buildProductList();
+        }
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -61,26 +93,13 @@ class _ProductViewState extends State<ProductView> {
           height: 50.0,
           child: TextFormField(
             onChanged: (String input) {
-              print("User entered: " + input);
               String inpLowercase = input.toLowerCase();
-              setState(() {
-                isSearching = true;
-              });
-              if (input == "") {
-                ProductAPIManager.getAllProducts().then((_result) {
-                  setState(() {
-                    isSearching = false;
-                    _pList = _result;
-                  });
-                });
-              } else {
-                ProductAPIManager.searchProduct(inpLowercase).then((_result) {
-                  setState(() {
-                    isSearching = false;
-                    _pList = _result;
-                  });
-                });
+              searchQry = inpLowercase.trim();
+              if (isSearching) {
+                // searchAgain = true;
+                return;
               }
+              buildProductList();
             },
             decoration: InputDecoration(
                 fillColor: Colors.white,
@@ -106,13 +125,33 @@ class _ProductViewState extends State<ProductView> {
           child: Expanded(
             child: isSearching
                 ? loadingRing
-                : ListView.builder(
-                    itemCount: _pList.length,
-                    itemBuilder: (context, index) {
-                      return ProductWidget(
-                        product: _pList[index],
-                      );
-                    }),
+                : RefreshIndicator(
+                    onRefresh: () {
+                      if (searchQry == "") {
+                        return ProductAPIManager.getAllProducts()
+                            .then((_result) {
+                          setState(() {
+                            _pList = _result;
+                            isSearching = false;
+                          });
+                        });
+                      } else {
+                        return ProductAPIManager.searchProduct(searchQry)
+                            .then((_result) {
+                          setState(() {
+                            _pList = _result;
+                            isSearching = false;
+                          });
+                        });
+                      }
+                    },
+                    child: ListView.builder(
+                      itemCount: _pList.length,
+                      itemBuilder: (context, index) {
+                        return ProductWidget(product: _pList[index]);
+                      },
+                    ),
+                  ),
           ),
         ),
       ]),
