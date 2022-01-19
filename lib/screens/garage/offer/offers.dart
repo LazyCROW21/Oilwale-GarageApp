@@ -3,7 +3,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:garage_app/models/offer.dart';
 import 'package:garage_app/service/offer_api.dart';
 import 'package:garage_app/theme/themedata.dart';
-import 'package:garage_app/components/garageofferwidget.dart';
+import 'package:garage_app/components/offerwidget.dart';
 
 class OffersPage extends StatefulWidget {
   const OffersPage({Key? key}) : super(key: key);

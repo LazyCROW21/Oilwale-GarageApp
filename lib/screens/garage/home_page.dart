@@ -5,7 +5,7 @@ import 'package:garage_app/models/garage.dart';
 import 'package:garage_app/models/offer.dart';
 import 'package:garage_app/service/offer_api.dart';
 import 'package:garage_app/theme/themedata.dart';
-import 'package:garage_app/components/garageofferwidget.dart';
+import 'package:garage_app/components/offerwidget.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
