@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:garage_app/service/newGarageRegisterapi.dart';
+import 'package:garage_app/service/newgarageregisterapi.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 // import 'package:garage_app/service/newGarageRegisterApi.dart';
 
