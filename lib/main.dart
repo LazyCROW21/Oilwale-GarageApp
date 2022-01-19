@@ -4,6 +4,7 @@ import 'package:garage_app/providers/cartprovider.dart';
 import 'package:garage_app/screens/Register.dart';
 import 'package:garage_app/screens/garage/account/purdchasehistory.dart';
 import 'package:garage_app/screens/garage/account/showproductsbought.dart';
+import 'package:garage_app/screens/garage/customerList.dart';
 import 'package:garage_app/screens/garage/product/cart.dart';
 import 'package:garage_app/screens/garage/garage_scaffold.dart';
 import 'package:garage_app/screens/garage/offer/offerdetails.dart';
@@ -50,7 +51,8 @@ class GarageApp extends StatelessWidget {
           '/garage_history': (context) => PurchaseHistory(),
           '/purchased_product': (context) => ShowProductbought(),
           '/cust_product': (context) => ProductDetails(),
-          '/garage_register': (context) => RegistrationWidget()
+          '/garage_register': (context) => RegistrationWidget(),
+          '/customer_list' : (context) => CustomerList()
         },
       ),
     );

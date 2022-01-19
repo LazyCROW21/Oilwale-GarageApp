@@ -122,29 +122,32 @@ class _HomePageState extends State<HomePage> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Stack(
-                      children: [
-                        Container(
-                          padding: EdgeInsets.fromLTRB(25.0, 25.0, 5.0, 5.0),
-                          child: Text(
-                            "Customers",
-                            style: TextStyle(
-                                color: Colors.deepOrange,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 14.0),
+                    InkWell(
+                      onTap: () { Navigator.pushNamed(context, '/customer_list'); },
+                      child: Stack(
+                        children: [
+                          Container(
+                            padding: EdgeInsets.fromLTRB(25.0, 25.0, 5.0, 5.0),
+                            child: Text(
+                              "Customers",
+                              style: TextStyle(
+                                  color: Colors.deepOrange,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 14.0),
+                            ),
                           ),
-                        ),
-                        Container(
-                          padding: EdgeInsets.fromLTRB(43.0, 40.0, 5.0, 18.0),
-                          child: Text(
-                            "${garage.totalCustomer}",
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20.0),
-                          ),
-                        )
-                      ],
+                          Container(
+                            padding: EdgeInsets.fromLTRB(43.0, 40.0, 5.0, 18.0),
+                            child: Text(
+                              "${garage.totalCustomer}",
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20.0),
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                     Stack(
                       children: [
