@@ -15,12 +15,6 @@ class _RegistrationWidgetState extends State<RegistrationWidget> {
   bool showMssg = false;
   final _formKey = GlobalKey<FormState>();
 
-  void _changed() {
-    setState(() async {
-      showMssg = true;
-    });
-  }
-
   late String garageId;
   @override
   Widget build(BuildContext context) {
