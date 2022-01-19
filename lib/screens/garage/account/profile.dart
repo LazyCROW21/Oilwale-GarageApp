@@ -22,6 +22,7 @@ class _ProfileState extends State<Profile> {
       ownerName: 'loading ..',
       totalScore: 0,
       garageName: 'loading ..',
+      isPremium: false,
   );
 
   final List<String> imageURLList = [
@@ -63,6 +64,7 @@ class _ProfileState extends State<Profile> {
             garagePreference.getString("referralCode") ?? "Not found";
         garage.totalScore = garagePreference.getInt("totalScore") ?? 0;
         garage.totalCustomer = garagePreference.getInt("totalCustomer") ?? 0;
+        garage.isPremium = garagePreference.getBool("premium") ?? false;
       }) ;} );
 
   }

@@ -100,7 +100,7 @@ class _RegistrationWidgetState extends State<RegistrationWidget> {
                             inputFormatters: <TextInputFormatter>[
                               FilteringTextInputFormatter.digitsOnly,
                             ],
-                            onSaved: (String? value) {
+                            onChanged: (String? value) {
                               phoneNumber = value!;
                             },
                             validator: (value) {
@@ -119,7 +119,7 @@ class _RegistrationWidgetState extends State<RegistrationWidget> {
                               labelText: 'Name ',
                             ),
                             keyboardType: TextInputType.name,
-                            onSaved: (String? value) {
+                            onChanged: (String? value) {
                               fullName = value!;
                             },
                             validator: (value) {
@@ -137,7 +137,7 @@ class _RegistrationWidgetState extends State<RegistrationWidget> {
                             ),
                             keyboardType: TextInputType.multiline,
                             maxLines: null,
-                            onSaved: (String? value) {
+                            onChanged: (String? value) {
                               address = value!;
                             },
                             validator: (value) {
@@ -177,6 +177,9 @@ class _RegistrationWidgetState extends State<RegistrationWidget> {
                   onPressed: () async {
                     if (_formKey.currentState!.validate()) {
                       await NewGarageRegisterApiManager.NewGarageAccept(address, fullName, phoneNumber);
+                      setState(() {
+                        showMssg = true;
+                      });
                     }
                   },
                   child: Text("Submit")),

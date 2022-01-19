@@ -36,7 +36,8 @@ class _HomePageState extends State<HomePage> {
       address: 'loading ..',
       ownerName: 'loading ..',
       totalScore: 0,
-      garageName: 'loading ..');
+      garageName: 'loading ..',
+      isPremium: false);
 
   bool isLoading = true;
   bool offersEmpty = false;

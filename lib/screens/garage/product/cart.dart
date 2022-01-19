@@ -51,7 +51,7 @@ class _CartPageState extends State<CartPage> {
                 child: Column(
                   children: [
                     Text(
-                        "Items Purchased: ${context.watch<CartProvider>().getCartItemCount}"),
+                        "Items in Cart : ${context.watch<CartProvider>().getCartItemCount}"),
                   ],
                 ),
               ),

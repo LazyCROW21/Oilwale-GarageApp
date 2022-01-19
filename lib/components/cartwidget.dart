@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:garage_app/providers/cartprovider.dart';
 import 'package:provider/src/provider.dart';
 import '../models/product.dart';
@@ -74,7 +75,9 @@ class _CartWidgetState extends State<CartWidget> {
                                       child: TextButton(
                                     onPressed: () {
                                       setState(() {
-                                          context.read<CartProvider>().decreaseQty(widget.item);
+                                        context
+                                            .read<CartProvider>()
+                                            .decreaseQty(widget.item);
                                         if (count > 1) count--;
                                       });
                                     },
@@ -85,14 +88,30 @@ class _CartWidgetState extends State<CartWidget> {
                                   )),
                                   Expanded(
                                     child: Center(
-                                      child: Text("$count"),
+                                      child: TextField(
+                                        textAlign: TextAlign.center,
+                                        maxLength: 3,
+                                       decoration: InputDecoration(
+                                         counter: Offstage(),
+                                       ),
+                                        controller: TextEditingController(text: '$count'),
+                                        keyboardType: TextInputType.number,
+                                        onChanged: (String? value) {
+                                          setState(() {
+                                            count = int.parse(value!);
+                                            context.read<CartProvider>().setQty(widget.item,count);
+                                          });
+                                        },
+                                      ),
                                     ),
                                   ),
                                   Expanded(
                                     child: TextButton(
                                         onPressed: () {
                                           setState(() {
-                                            context.read<CartProvider>().addQty(widget.item);
+                                            context
+                                                .read<CartProvider>()
+                                                .addQty(widget.item);
                                             count++;
                                           });
                                         },

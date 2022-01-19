@@ -13,6 +13,7 @@ class Garage {
   late String referralCode;
   late  int totalScore;
   late int totalCustomer;
+  late bool isPremium;
 
   Garage.m({
     required this.garageId
@@ -33,6 +34,7 @@ class Garage {
     required this.phoneNumber,
     required this.pincode,
     required this.referralCode,
+    required this.isPremium
   });
 
   Garage.fromJSON(Map<String, dynamic> json) {
@@ -51,5 +53,6 @@ class Garage {
     this.phoneNumber = json['phoneNumber'];
     this.pincode = json['pincode'];
     this.referralCode = json['referralCode'];
+    this.isPremium = json['premium'];
   }
 }

@@ -48,4 +48,10 @@ class CartProvider with ChangeNotifier {
     _cartItemCount = 0;
     notifyListeners();
   }
+
+  void setQty(Product product, int qty) {
+    int c = cartProducts.indexOf(product);
+    cartProducts[c].qty = qty;
+    notifyListeners();
+  }
 }

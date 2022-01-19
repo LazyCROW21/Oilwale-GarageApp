@@ -1,6 +1,4 @@
 import 'dart:convert';
-
-import 'package:garage_app/models/offer.dart';
 import 'package:http/http.dart' as http;
 
 const String base_url = "https://oilwale.herokuapp.com/api";

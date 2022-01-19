@@ -29,6 +29,7 @@ class ServiceHistory {
       this.garage = Garage.fromJSON(json['garage']);
     } else {
       this.garage = Garage(
+          isPremium: false,
           address: '',
           area: '',
           garageId: '',
