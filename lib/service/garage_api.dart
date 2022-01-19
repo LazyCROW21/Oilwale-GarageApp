@@ -81,14 +81,14 @@ class GarageAPIManager {
   }
 
   // return customer object on success or false on error
-  static Future<dynamic> getGarageForLogin(String garageId) async {
+  static Future<dynamic> getGarageForLogin(String garageId, String token) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
-    String authToken = preferences.getString('token') ?? '';
-    if (authToken == '') {
-      return false;
-    }
+    // String authToken = preferences.getString('token') ?? '';
+    // if (authToken == '') {
+    //   return false;
+    // }
     Map<String, String> reqHeader = {
-      'Authorization': 'Bearer $authToken',
+      'Authorization': 'Bearer $token',
       // 'Content-Type': 'application/json'
     };
     try {
@@ -101,7 +101,7 @@ class GarageAPIManager {
         Map<String, dynamic> jsonMap = jsonDecode(jsonString);
         print(jsonMap);
         Garage garage = Garage.fromJSON(jsonMap);
-        SharedPreferences preferences = await SharedPreferences.getInstance();
+        // SharedPreferences preferences = await SharedPreferences.getInstance();
 
         try {
           preferences.setString('garageId', jsonMap['garageId']);
