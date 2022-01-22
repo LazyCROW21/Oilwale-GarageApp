@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:garage_app/components/showproductstile.dart';
-import 'package:garage_app/models/order.dart';
+import 'package:mechanic_mart/components/showproductstile.dart';
+import 'package:mechanic_mart/models/order.dart';
 
 class ShowProductbought extends StatelessWidget {
   ShowProductbought({Key? key}) : super(key: key);

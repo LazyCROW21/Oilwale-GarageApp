@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:garage_app/providers/cartprovider.dart';
-import 'package:garage_app/screens/Register.dart';
-import 'package:garage_app/screens/garage/account/purdchasehistory.dart';
-import 'package:garage_app/screens/garage/account/showproductsbought.dart';
-import 'package:garage_app/screens/garage/customerList.dart';
-import 'package:garage_app/screens/garage/product/cart.dart';
-import 'package:garage_app/screens/garage/garage_scaffold.dart';
-import 'package:garage_app/screens/garage/offer/offerdetails.dart';
-import 'package:garage_app/screens/garage/offer/offers.dart';
-import 'package:garage_app/screens/login.dart';
-import 'package:garage_app/screens/logout.dart';
-import 'package:garage_app/theme/themedata.dart';
-import 'package:garage_app/screens/garage/product/productDetails.dart';
+import 'package:mechanic_mart/providers/cartprovider.dart';
+import 'package:mechanic_mart/screens/Register.dart';
+import 'package:mechanic_mart/screens/garage/account/purdchasehistory.dart';
+import 'package:mechanic_mart/screens/garage/account/showproductsbought.dart';
+import 'package:mechanic_mart/screens/garage/customerList.dart';
+import 'package:mechanic_mart/screens/garage/product/cart.dart';
+import 'package:mechanic_mart/screens/garage/garage_scaffold.dart';
+import 'package:mechanic_mart/screens/garage/offer/offerdetails.dart';
+import 'package:mechanic_mart/screens/garage/offer/offers.dart';
+import 'package:mechanic_mart/screens/login.dart';
+import 'package:mechanic_mart/screens/logout.dart';
+import 'package:mechanic_mart/theme/themedata.dart';
+import 'package:mechanic_mart/screens/garage/product/productDetails.dart';
 import 'package:provider/provider.dart';
 
 void main() {

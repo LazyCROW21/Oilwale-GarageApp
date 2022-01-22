@@ -1,5 +1,5 @@
-import 'package:garage_app/models/garage.dart';
-import 'package:garage_app/models/product.dart';
+import 'package:mechanic_mart/models/garage.dart';
+import 'package:mechanic_mart/models/product.dart';
 
 class ServiceHistory {
   late final String serviceId;

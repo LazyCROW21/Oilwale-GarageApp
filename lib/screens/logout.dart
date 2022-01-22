@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:garage_app/theme/themedata.dart';
+import 'package:mechanic_mart/theme/themedata.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 enum Choice { Customer, Garage }

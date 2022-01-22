@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:garage_app/models/product.dart';
-import 'package:garage_app/service/product_api.dart';
-import 'package:garage_app/theme/themedata.dart';
-import 'package:garage_app/components/productwidget.dart';
+import 'package:mechanic_mart/models/product.dart';
+import 'package:mechanic_mart/service/product_api.dart';
+import 'package:mechanic_mart/theme/themedata.dart';
+import 'package:mechanic_mart/components/productwidget.dart';
 
 class ProductsPage extends StatelessWidget {
   const ProductsPage({

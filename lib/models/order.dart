@@ -1,4 +1,4 @@
-import 'package:garage_app/models/product.dart';
+import 'package:mechanic_mart/models/product.dart';
 
 class Order {
   late String orderId;

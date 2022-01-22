@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:garage_app/models/product.dart';
-import 'package:garage_app/theme/themedata.dart';
+import 'package:mechanic_mart/models/product.dart';
+import 'package:mechanic_mart/theme/themedata.dart';
 
 class ShowProductsTile extends StatelessWidget {
   final Product product;

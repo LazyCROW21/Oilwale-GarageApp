@@ -1,7 +1,9 @@
 import 'dart:convert';
-import 'package:garage_app/models/customer.dart';
+import 'package:mechanic_mart/models/customer.dart';
 import 'package:http/http.dart' as http;
-import 'package:garage_app/models/customervehicle.dart';
+
+import 'package:mechanic_mart/models/customer.dart';
+import 'package:mechanic_mart/models/customervehicle.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 const String base_url = "https://oilwale.herokuapp.com/api";

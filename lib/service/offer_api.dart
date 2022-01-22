@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:garage_app/models/offer.dart';
+import 'package:mechanic_mart/models/offer.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 

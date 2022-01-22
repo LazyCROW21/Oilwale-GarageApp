@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:garage_app/components/offerwidget.dart';
-import 'package:garage_app/models/customer.dart';
-import 'package:garage_app/service/garage_api.dart';
+import 'package:mechanic_mart/components/customerlistwidget.dart';
+import 'package:mechanic_mart/components/offerwidget.dart';
+import 'package:mechanic_mart/models/customer.dart';
+import 'package:mechanic_mart/service/garage_api.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class CustomerList extends StatefulWidget {
@@ -14,6 +15,7 @@ class CustomerList extends StatefulWidget {
 class _CustomerListState extends State<CustomerList> {
   late final String garageId;
   List<Customer> _custlist = [];
+  late  Customer customer;
   bool isloading = true;
 
   @override
@@ -36,12 +38,12 @@ class _CustomerListState extends State<CustomerList> {
       appBar: AppBar(
         title: Text("Your Listed Customers"),
       ),
-      // body: Container(
-      //   padding: EdgeInsets.all(10.0),
-      //   child: SingleChildScrollView(
-      //       // child: ListView.builder(itemBuilder: (context, index) {
-      //     // return OffersWidget(offers: offers);
-      //   })),
-      );
+      body: Container(
+        padding: EdgeInsets.all(10.0),
+        child: SingleChildScrollView(
+            child: ListView.builder(itemBuilder: (context, index) {
+          return CustomerDisplayWidget(customer: _custlist[index],);
+        })),
+      ));
   }
 }

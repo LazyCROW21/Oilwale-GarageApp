@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:garage_app/models/offer.dart';
-import 'package:garage_app/service/offer_api.dart';
-import 'package:garage_app/theme/themedata.dart';
-import 'package:garage_app/components/offerwidget.dart';
+import 'package:mechanic_mart/models/offer.dart';
+import 'package:mechanic_mart/service/offer_api.dart';
+import 'package:mechanic_mart/theme/themedata.dart';
+import 'package:mechanic_mart/components/offerwidget.dart';
 
 class OffersPage extends StatefulWidget {
   const OffersPage({Key? key}) : super(key: key);

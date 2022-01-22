@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:garage_app/components/purchasedproductwidget.dart';
-import 'package:garage_app/models/order.dart';
-import 'package:garage_app/service/order_api.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:mechanic_mart/components/purchasedproductwidget.dart';
+import 'package:mechanic_mart/models/order.dart';
+import 'package:mechanic_mart/service/order_api.dart';
+import 'package:mechanic_mart/theme/themedata.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class PurchaseHistory extends StatefulWidget {
@@ -18,7 +20,10 @@ class _PurchaseHistoryState extends State<PurchaseHistory> {
   String garageId = "";
   late SharedPreferences sp;
   bool _orderEmpty = false;
-
+  bool isloading = true;
+  SpinKitRing loadingRing = SpinKitRing(
+    color: AppColorSwatche.primary,
+  );
   // void callb() async{
   //
   //
@@ -35,6 +40,7 @@ class _PurchaseHistoryState extends State<PurchaseHistory> {
         setState(() {
           _orderList = resp;
           _orderList = _orderList.reversed.toList();
+          isloading = false;
           if (_orderList.isEmpty) {
             _orderEmpty = true;
           }
@@ -62,14 +68,31 @@ class _PurchaseHistoryState extends State<PurchaseHistory> {
           ),
         ),
         body: Container(
-            child: ListView.builder(
+            child: isloading ?
+            loadingRing :
+                RefreshIndicator(onRefresh: () {
+                  return OrderAPIManager.getGarageOrders(garageId).then((resp) {
+                  setState(() {
+                    _orderList = resp;
+                    _orderList = _orderList.reversed.toList();
+                    if (_orderList.isEmpty) {
+                      _orderEmpty = true;
+                    }
+                  }
+                  );
+                }).onError((error, stackTrace) {
+                  print(error);
+                });
+                  },
+                child:
+            ListView.builder(
                 shrinkWrap: true,
                 itemCount: _orderList.length,
                 itemBuilder: (context, index) {
                   return PurchasedProductWidget(
                     orders:_orderList[index],
                   );
-                }),
+                }),)
             ));
   }
 }

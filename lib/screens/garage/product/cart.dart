@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:garage_app/providers/cartprovider.dart';
-import 'package:garage_app/models/product.dart';
-import 'package:garage_app/components/cartwidget.dart';
-import 'package:garage_app/service/order_api.dart';
+import 'package:mechanic_mart/providers/cartprovider.dart';
+import 'package:mechanic_mart/models/product.dart';
+import 'package:mechanic_mart/components/cartwidget.dart';
+import 'package:mechanic_mart/service/order_api.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

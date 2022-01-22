@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:garage_app/models/order.dart';
+import 'package:mechanic_mart/models/order.dart';
 
 
 class PurchasedProductWidget extends StatefulWidget {

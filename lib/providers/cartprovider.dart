@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:garage_app/models/product.dart';
+import 'package:mechanic_mart/models/product.dart';
 
 class CartProvider with ChangeNotifier {
 

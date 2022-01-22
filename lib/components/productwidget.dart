@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:garage_app/models/product.dart';
+import 'package:mechanic_mart/models/product.dart';
 import 'package:provider/provider.dart';
-import 'package:garage_app/providers/cartprovider.dart';
+import 'package:mechanic_mart/providers/cartprovider.dart';
 
 class ProductWidget extends StatefulWidget {
   final Product product;

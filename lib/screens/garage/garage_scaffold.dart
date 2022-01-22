@@ -1,8 +1,8 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:garage_app/providers/cartprovider.dart';
-import 'package:garage_app/screens/garage/product/products.dart';
-import 'package:garage_app/screens/garage/account/profile.dart';
+import 'package:mechanic_mart/providers/cartprovider.dart';
+import 'package:mechanic_mart/screens/garage/product/products.dart';
+import 'package:mechanic_mart/screens/garage/account/profile.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'home_page.dart';
@@ -140,7 +140,7 @@ class _GarageScaffoldState extends State<GarageScaffold> {
               ]
             : [],
         title: Text(
-          "OilWale",
+          "Mechanic Mart",
           style: TextStyle(color: Colors.deepOrange),
         ),
         centerTitle: true,

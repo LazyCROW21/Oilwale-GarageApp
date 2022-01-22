@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:garage_app/theme/themedata.dart';
-import 'package:garage_app/service/auth.dart';
+import 'package:mechanic_mart/theme/themedata.dart';
+import 'package:mechanic_mart/service/auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginScreen extends StatefulWidget {

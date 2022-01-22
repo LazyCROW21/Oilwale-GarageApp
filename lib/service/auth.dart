@@ -1,6 +1,6 @@
 import 'dart:convert';
-import 'package:garage_app/models/garage.dart';
-import 'package:garage_app/service/garage_api.dart';
+import 'package:mechanic_mart/models/garage.dart';
+import 'package:mechanic_mart/service/garage_api.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -26,7 +26,6 @@ class AuthManager {
         var jsonString = response.body;
         Map<String, dynamic> jsonMap = jsonDecode(jsonString);
         print(jsonMap);
-
         SharedPreferences preferences = await SharedPreferences.getInstance();
         preferences.setString('token', jsonMap['token']);
         preferences.setString('role', 'garage');

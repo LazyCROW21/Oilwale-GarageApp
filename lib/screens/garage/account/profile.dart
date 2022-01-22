@@ -1,7 +1,7 @@
 import 'dart:core';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:garage_app/models/garage.dart';
+import 'package:mechanic_mart/models/garage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Profile extends StatefulWidget {

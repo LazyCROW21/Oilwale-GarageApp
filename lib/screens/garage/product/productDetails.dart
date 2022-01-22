@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:garage_app/models/product.dart';
-import 'package:garage_app/models/vehicle.dart';
-import 'package:garage_app/providers/cartprovider.dart';
-import 'package:garage_app/service/vehicle_api.dart';
-import 'package:garage_app/theme/themedata.dart';
+import 'package:mechanic_mart/models/product.dart';
+import 'package:mechanic_mart/models/vehicle.dart';
+import 'package:mechanic_mart/providers/cartprovider.dart';
+import 'package:mechanic_mart/service/vehicle_api.dart';
+import 'package:mechanic_mart/theme/themedata.dart';
 import 'package:provider/src/provider.dart';
 
 class ProductDetails extends StatefulWidget {

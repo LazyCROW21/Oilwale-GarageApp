@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:garage_app/models/offer.dart';
+import 'package:mechanic_mart/models/offer.dart';
 
 class OffersWidget extends StatelessWidget {
   const OffersWidget({Key? key, required this.offers}) : super(key: key);

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:mechanic_mart/models/customer.dart';
 
 class CustomerDisplayWidget extends StatelessWidget {
-  const CustomerDisplayWidget({Key? key}) : super(key: key);
-
+  const CustomerDisplayWidget({Key? key,required this.customer}) : super(key: key);
+  final Customer customer;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -25,30 +26,19 @@ class CustomerDisplayWidget extends StatelessWidget {
             ),
             Expanded(
               flex: 3,
-              child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    // Text(
-                    //   offers.schemeName.toUpperCase(),
-                    //   style: TextStyle(
-                    //       fontWeight: FontWeight.bold, fontSize: 14.0),
-                    // ),
-                    // SizedBox(
-                    //   height: 5.0,
-                    // ),
-                    // Text(
-                    //   "offers.description halleleua",
-                    //   style:
-                    //   TextStyle(fontSize: 12.0, color: Colors.deepOrange),
-                    // ),
-                    // SizedBox(
-                    //   height: 5.0,
-                    // ),
-                    // Text(
-                    //   "Last Date  :" + offers.endsAt.substring(0, 10),
-                    //   style:
-                    //   TextStyle(fontSize: 11.0, color: Colors.grey[800]),
-                    // )
+                    Text(
+                      customer.customerName,
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 14.0),
+                    ),
+                    Text(
+                      customer.customerPhoneNumber,
+                      style:
+                      TextStyle(fontSize: 12.0, color: Colors.deepOrange),
+                    ),
                   ]),
             ),
           ],

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:garage_app/service/newgarageregisterapi.dart';
+import 'package:mechanic_mart/service/newgarageregisterapi.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-// import 'package:garage_app/service/newGarageRegisterApi.dart';
+// import 'package:mechanic_mart/service/newGarageRegisterApi.dart';
 
 class RegistrationWidget extends StatefulWidget {
   RegistrationWidget({Key? key}) : super(key: key);

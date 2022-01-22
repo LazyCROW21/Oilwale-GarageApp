@@ -1,6 +1,6 @@
 import 'dart:convert';
-import 'package:garage_app/models/customer.dart';
-import 'package:garage_app/models/garage.dart';
+import 'package:mechanic_mart/models/customer.dart';
+import 'package:mechanic_mart/models/garage.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 

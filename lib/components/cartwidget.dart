@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:garage_app/providers/cartprovider.dart';
+import 'package:mechanic_mart/providers/cartprovider.dart';
 import 'package:provider/src/provider.dart';
 import '../models/product.dart';
 

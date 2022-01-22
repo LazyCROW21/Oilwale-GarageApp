@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:garage_app/models/customervehicle.dart';
-import 'package:garage_app/theme/themedata.dart';
+import 'package:mechanic_mart/models/customervehicle.dart';
+import 'package:mechanic_mart/theme/themedata.dart';
 
 class VehicleCard extends StatefulWidget {
   final CustomerVehicle customerVehicle;

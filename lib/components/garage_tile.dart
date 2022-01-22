@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:garage_app/models/garage.dart';
+import 'package:mechanic_mart/models/garage.dart';
 
 class GarageTile extends StatelessWidget {
   final Garage garage;
