@@ -7,15 +7,6 @@ const String base_url = "https://oilwale.herokuapp.com/api";
 class NewGarageRegisterApiManager {
   static Future<bool> newGarageAccept(
       String address, String fullName, String phoneNumber) async {
-    SharedPreferences preferences = await SharedPreferences.getInstance();
-    String authToken = preferences.getString('token') ?? '';
-    if (authToken == '') {
-      return false;
-    }
-    Map<String, String> reqHeader = {
-      'Authorization': 'Bearer $authToken',
-      'Content-Type': 'application/json'
-    };
     try {
       String urlStr = base_url + "/newGarage";
       Map<String, dynamic> offerAcceptData = {
@@ -28,7 +19,8 @@ class NewGarageRegisterApiManager {
       var url = Uri.parse(urlStr);
       print(dataString);
       var response =
-          await client.post(url, body: dataString, headers: reqHeader);
+          await client.post(url,headers: <String,String>{'Content-Type' : 'application/json; charset=UTF-8'}, body: dataString);
+      print(response.statusCode);
       if (response.statusCode == 200) {
         var jsonString = response.body;
         Map<String, dynamic> jsonMap = jsonDecode(jsonString);

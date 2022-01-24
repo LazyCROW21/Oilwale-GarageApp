@@ -75,6 +75,8 @@ class _ProductWidgetState extends State<ProductWidget> {
                         width: 175.0,
                         child: Text(
                           widget.product.specification,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
                           textAlign: TextAlign.left,
                           style: TextStyle(
                             fontSize: 12.0,
@@ -83,8 +85,10 @@ class _ProductWidgetState extends State<ProductWidget> {
                         ),
                       ),
                       Container(
+                        width: 175.0,
                         child: Text(
                           "Grade :" + widget.product.grade,
+                          overflow: TextOverflow.ellipsis,
                           style: TextStyle(fontSize: 10.0, color: Colors.grey),
                         ),
                       ),

@@ -98,7 +98,7 @@ class _CartWidgetState extends State<CartWidget> {
                                         keyboardType: TextInputType.number,
                                         onChanged: (String? value) {
                                           setState(() {
-                                            count = int.parse(value!);
+                                            count = int.tryParse(value!)?? count;
                                             context.read<CartProvider>().setQty(widget.item,count);
                                           });
                                         },

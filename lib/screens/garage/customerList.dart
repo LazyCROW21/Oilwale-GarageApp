@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:mechanic_mart/components/customerlistwidget.dart';
-import 'package:mechanic_mart/components/offerwidget.dart';
 import 'package:mechanic_mart/models/customer.dart';
 import 'package:mechanic_mart/service/garage_api.dart';
+import 'package:mechanic_mart/theme/themedata.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class CustomerList extends StatefulWidget {
@@ -14,36 +15,46 @@ class CustomerList extends StatefulWidget {
 
 class _CustomerListState extends State<CustomerList> {
   late final String garageId;
-  List<Customer> _custlist = [];
-  late  Customer customer;
-  bool isloading = true;
-
+  List<Customer> _customerList = [];
+  late Customer customer;
+  bool isLoading = true;
+  SpinKitRing loadingRing = SpinKitRing(
+    color: AppColorSwatche.primary,
+  );
   @override
   void initState() {
-    super.initState();
     SharedPreferences.getInstance().then((garagePreference) {
       garageId = garagePreference.getString("garageId") ?? "Not found";
-      GarageAPIManager.getAllCustomers(garageId).then((resp){
-        _custlist = resp;
-        isloading = false;
-      }).onError((error, stackTrace){
+      print(garageId);
+      GarageAPIManager.getAllCustomers(garageId).then((resp) {
+        setState(() {
+          _customerList = resp;
+          isLoading = false;
+        });
+      }).onError((error, stackTrace) {
         print(error);
       });
     });
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Your Listed Customers"),
-      ),
-      body: Container(
-        padding: EdgeInsets.all(10.0),
-        child: SingleChildScrollView(
-            child: ListView.builder(itemBuilder: (context, index) {
-          return CustomerDisplayWidget(customer: _custlist[index],);
-        })),
-      ));
+        appBar: AppBar(
+          title: Text("Your Listed Customers"),
+        ),
+        body: Container(
+          padding: EdgeInsets.all(8.0),
+          child: isLoading
+              ? loadingRing
+              : ListView.builder(
+                  itemCount: _customerList.length,
+                  itemBuilder: (context, index) {
+                    return CustomerDisplayWidget(
+                      customer: _customerList[index],
+                    );
+                  }),
+        ));
   }
 }

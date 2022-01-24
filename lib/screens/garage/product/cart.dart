@@ -22,7 +22,11 @@ class _CartPageState extends State<CartPage> {
       setState(() {
         map12 = Map.fromIterable(cartProducts, key: (product) => product.id, value: (product) => product!.qty);
       });
-
+    late bool _cartEmpty = true;
+    print(cartProducts);
+    if(cartProducts.isNotEmpty){
+      _cartEmpty = false;
+    }
     late String garageId;
 
     SharedPreferences.getInstance().then((garagePreference) {
@@ -71,6 +75,8 @@ class _CartPageState extends State<CartPage> {
                 );
               },
             ),
+            _cartEmpty ?
+                Container() :
             Expanded(
               flex: 1,
                 child: Container(

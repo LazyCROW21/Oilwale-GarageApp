@@ -86,8 +86,8 @@ class _RegistrationWidgetState extends State<RegistrationWidget> {
                                 TextFormField(
                                   decoration: const InputDecoration(
                                     icon: Icon(Icons.dialpad),
-                                    hintText: 'Mobile Number',
-                                    labelText: 'Number',
+                                    hintText: 'Please Enter your Number',
+                                    labelText: 'Phone Number',
                                   ),
                                   keyboardType: TextInputType.number,
                                   inputFormatters: <TextInputFormatter>[
@@ -108,8 +108,8 @@ class _RegistrationWidgetState extends State<RegistrationWidget> {
                                 TextFormField(
                                   decoration: const InputDecoration(
                                     icon: Icon(Icons.person),
-                                    hintText: 'Your Name',
-                                    labelText: 'Name ',
+                                    hintText: 'Type your Garage Name',
+                                    labelText: 'Garage Name ',
                                   ),
                                   keyboardType: TextInputType.name,
                                   onChanged: (String? value) {

@@ -9,10 +9,11 @@ const String base_url = "https://oilwale.herokuapp.com/api";
 class GarageAPIManager {
   // return list of garages on success or false on error
   static Future<dynamic> getAllCustomers(String garageId) async {
+    List<Customer> customers = [];
     SharedPreferences preferences = await SharedPreferences.getInstance();
     String authToken = preferences.getString('token') ?? '';
     if (authToken == '') {
-      return false;
+      return customers;
     }
     Map<String, String> reqHeader = {
       'Authorization': 'Bearer $authToken',
@@ -41,7 +42,7 @@ class GarageAPIManager {
       print("Exception $e");
       print("StackTrace $s");
     }
-    return false;
+    return customers;
   }
 
   // return the search result from all garage list

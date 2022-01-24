@@ -58,6 +58,9 @@ flutter_icons:
   ios: true
   image_path: assets/img/icon/icon.png
 
+flutter_launcher_name:
+  name: "Mechanic Mart"
+
 # The following section is specific to Flutter.
 flutter:
 

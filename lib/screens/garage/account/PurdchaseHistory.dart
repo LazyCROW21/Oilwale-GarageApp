@@ -19,16 +19,11 @@ class _PurchaseHistoryState extends State<PurchaseHistory> {
   List<Order> _orderList = [];
   String garageId = "";
   late SharedPreferences sp;
-  bool _orderEmpty = false;
+  // bool _orderEmpty = false;
   bool isloading = true;
   SpinKitRing loadingRing = SpinKitRing(
     color: AppColorSwatche.primary,
   );
-  // void callb() async{
-  //
-  //
-  //     } );
-  // }
 
   @override
   void initState() {
@@ -42,7 +37,7 @@ class _PurchaseHistoryState extends State<PurchaseHistory> {
           _orderList = _orderList.reversed.toList();
           isloading = false;
           if (_orderList.isEmpty) {
-            _orderEmpty = true;
+            // _orderEmpty = true;
           }
         }
         );
@@ -76,7 +71,7 @@ class _PurchaseHistoryState extends State<PurchaseHistory> {
                     _orderList = resp;
                     _orderList = _orderList.reversed.toList();
                     if (_orderList.isEmpty) {
-                      _orderEmpty = true;
+                      // _orderEmpty = true;
                     }
                   }
                   );
