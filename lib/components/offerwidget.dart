@@ -36,6 +36,7 @@ class OffersWidget extends StatelessWidget {
                     children: [
                       Text(
                         offers.schemeName.toUpperCase(),
+                        overflow: TextOverflow.ellipsis,
                         style: TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 14.0),
                       ),
@@ -43,7 +44,8 @@ class OffersWidget extends StatelessWidget {
                         height: 5.0,
                       ),
                       Text(
-                        "offers.description halleleua",
+                        offers.description,
+                        overflow: TextOverflow.ellipsis,
                         style:
                         TextStyle(fontSize: 12.0, color: Colors.deepOrange),
                       ),

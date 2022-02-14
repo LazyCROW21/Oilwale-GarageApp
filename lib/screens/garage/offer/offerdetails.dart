@@ -2,10 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:mechanic_mart/models/offer.dart';
-import 'package:mechanic_mart/components/showproductstile.dart';
 import 'package:mechanic_mart/service/offer_api.dart';
 import 'package:mechanic_mart/theme/themedata.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../../components/showproductstile.dart';
 
 class OfferDetails extends StatefulWidget {
   const OfferDetails({Key? key}) : super(key: key);
@@ -21,6 +22,7 @@ class _OfferDetailsState extends State<OfferDetails> {
     color: AppColorSwatche.primaryGreen,
   );
   bool isloading = true;
+
   @override
   void setState(VoidCallback fn) {
     if (mounted) {
@@ -28,13 +30,13 @@ class _OfferDetailsState extends State<OfferDetails> {
     }
   }
 
-  late String garageId ;
+  late String garageId;
 
   bool isOfferAccepted = false;
 
   var message = "Accept";
 
-  late Offer offers ;
+  late Offer offers;
 
   @override
   void initState() {
@@ -45,7 +47,7 @@ class _OfferDetailsState extends State<OfferDetails> {
         setState(() {
           isOfferAccepted = resp;
           isloading = false;
-          if(isOfferAccepted)
+          if (isOfferAccepted)
             message = " Accepted ";
         });
       }).onError((error, stackTrace) {
@@ -56,11 +58,13 @@ class _OfferDetailsState extends State<OfferDetails> {
 
   @override
   Widget build(BuildContext context) {
-
-     offers = ModalRoute.of(context)!.settings.arguments as Offer;
+    offers = ModalRoute
+        .of(context)!
+        .settings
+        .arguments as Offer;
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.grey[100]!.withOpacity(0.98),
       appBar: AppBar(
         backgroundColor: Colors.deepOrange,
         elevation: 3.0,
@@ -72,94 +76,98 @@ class _OfferDetailsState extends State<OfferDetails> {
           color: Colors.white,
         ),
       ),
-      body: Card(
-        shadowColor: Colors.deepOrangeAccent,
-        borderOnForeground: true,
-        elevation: 0.0,
-        child: Container(
-          color: Colors.grey[100]!.withOpacity(.5),
-          padding: EdgeInsets.all(10.0),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              SizedBox(
-                height: 10.0,
+      body: Column(
+        children: [
+          Container(
+            padding: EdgeInsets.only(top: 10),
+            width: double.infinity,
+            child: Card(
+              // shadowColor: Colors.deepOrange,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
               ),
-              Text(
-                offers.schemeName.toUpperCase(),
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20.0,
-                    color: Colors.deepOrangeAccent),
-              ),
-              SizedBox(
-                height: 20.0,
-              ),
-              Container(
-                child: Text(
-                  "10 rupiye ki pepsi , mera description secsi wagfw aFwf wsfiawref iafwref ",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(color: Colors.grey[700]),
-                ),
-              ),
-              SizedBox(
-                height: 10.0,
-              ),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 10.0),
-                child: Row(
+              elevation: 7.0,
+              child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Expanded(
-                        child: Text(
+                    SizedBox(
+                      height: 20.0,
+                    ),
+                    Text(
+                      offers.schemeName.toUpperCase(),
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20.0,
+                          color: Colors.deepOrangeAccent),
+                    ),
+                    SizedBox(
+                      height: 20.0,
+                    ),
+                    Container(
+                      child: Text(
+                        offers.description,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(color: Colors.grey[700]),
+                      ),
+                    ),
+                    SizedBox(height: 20,)
+                  ]
+              ),
+            ),
+          ),
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 10.0,vertical: 10),
+            child: Row(
+              children: [
+                Expanded(
+                    child: Text(
                       "Last Date:",
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.deepOrangeAccent),
                     )),
-                    Expanded(
-                      flex: 2,
-                      child: Text(offers.endsAt.substring(0, 10)),
-                    )
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: 30.0,
-              ),
-              Expanded(
-                  child: ListView.builder(
-                      itemCount: offers.productList.length,
-                      itemBuilder: (context, index) {
-                        return ShowProductsTile(
-                            product: offers.productList[index]);
-                      })),
-              SizedBox(
-                height: 10.0,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  TextButton(
-                      onPressed: () async {
-                        if(!isOfferAccepted) {
-                          await OffersAPIManager.offerAccept(
-                              true, garageId, offers.schemeId);
-                          Navigator.pop(context, '/garage_offers');
-                        }
-                      },
-                      style: TextButton.styleFrom(
-                        backgroundColor: Colors.green[100]!.withOpacity(0.5),
-                      ),
-                      child: isloading ? loadingRing :Text(
-                        message,
-                        style: TextStyle(color: Colors.green),
-                      ))
-                ],
-              )
-            ],
+                Expanded(
+                  flex: 2,
+                  child: Text(offers.endsAt.substring(0, 10)),
+                )
+              ],
+            ),
           ),
-        ),
+          SizedBox(
+            height: 30.0,
+          ),
+          Expanded(
+              child: ListView.builder(
+                  itemCount: offers.productList.length,
+                  itemBuilder: (context, index) {
+                    return ShowProductsTile(
+                        product: offers.productList[index]);
+                  })),
+          SizedBox(
+            height: 10.0,
+          ),
+          // Row(
+          //   mainAxisAlignment: MainAxisAlignment.spaceAround,
+          //   children: [
+          //     TextButton(
+          //         onPressed: () async {
+          //           if(!isOfferAccepted) {
+          //             await OffersAPIManager.offerAccept(
+          //                 true, garageId, offers.schemeId);
+          //             Navigator.pop(context, '/garage_offers');
+          //           }
+          //         },
+          //         style: TextButton.styleFrom(
+          //           backgroundColor: Colors.green[100]!.withOpacity(0.5),
+          //         ),
+          //         child: isloading ? loadingRing :Text(
+          //           message,
+          //           style: TextStyle(color: Colors.green),
+          //         ))
+          //   ],
+          // )
+        ],
       ),
     );
   }

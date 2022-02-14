@@ -19,8 +19,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int custNumber = 0;
-  String refferalCode = "";
+  int customerNumber = 0;
+  String referralCode = "";
   int credPoints = 0;
   late Offer offers;
   late Function gotoOffer;
@@ -84,8 +84,8 @@ class _HomePageState extends State<HomePage> {
         if (_offList.isEmpty) {
           _changed();
         }
-        custNumber = 500;
-        refferalCode = "ADF657";
+        customerNumber = 500;
+        referralCode = "ADF657";
         credPoints = 786;
         isLoading = false;
       });
@@ -98,7 +98,7 @@ class _HomePageState extends State<HomePage> {
     this.gotoOffer = gotoOffer;
   }
 
-  bool showoffers = false;
+  bool showOffers = false;
 
   @override
   Widget build(BuildContext context) {
@@ -118,28 +118,49 @@ class _HomePageState extends State<HomePage> {
                     BoxShadow(blurRadius: 2.0, color: Colors.grey),
                   ]),
               child: Column(children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    InkWell(
-                      onTap: () { Navigator.pushNamed(context, '/customer_list'); },
-                      child: Stack(
-                        children: [
-                          Container(
-                            padding: EdgeInsets.fromLTRB(25.0, 25.0, 5.0, 5.0),
-                            child: Text(
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: 20),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      InkWell(
+                        onTap: () { Navigator.pushNamed(context, '/customer_list'); },
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
                               "Customers",
                               style: TextStyle(
                                   color: Colors.deepOrange,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 14.0),
                             ),
-                          ),
-                          Container(
-                            padding: EdgeInsets.fromLTRB(43.0, 40.0, 5.0, 18.0),
-                            child: Text(
+                            Text(
                               "${garage.totalCustomer}",
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20.0),
+                            )
+                          ],
+                        ),
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "Credit Points",
+                            style: TextStyle(
+                                color: Colors.deepOrange,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 14.0),
+                          ),
+                          Center(
+                            child: Text(
+                              "${garage.totalScore}",
                               style: TextStyle(
                                   color: Colors.black,
                                   fontWeight: FontWeight.bold,
@@ -148,34 +169,8 @@ class _HomePageState extends State<HomePage> {
                           )
                         ],
                       ),
-                    ),
-                    Stack(
-                      children: [
-                        Container(
-                          padding: EdgeInsets.fromLTRB(25.0, 25.0, 5.0, 5.0),
-                          child: Text(
-                            "Credit Points",
-                            style: TextStyle(
-                                color: Colors.deepOrange,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 14.0),
-                          ),
-                        ),
-                        Container(
-                          padding: EdgeInsets.fromLTRB(38.0, 40.0, 5.0, 18.0),
-                          child: Center(
-                            child: Text(
-                              "${garage.totalScore}",
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20.0),
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(18.0, 0.0, 18.0, 8.0),
@@ -185,32 +180,29 @@ class _HomePageState extends State<HomePage> {
                     thickness: 1.0,
                   ),
                 ),
-                Stack(
-                  children: [
-                    Container(
-                      child: Center(
-                        child: Text(
-                          "Referral Code",
-                          style: TextStyle(
-                              color: Colors.deepOrange,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 14.0),
-                        ),
-                      ),
+                Padding(
+                  padding: EdgeInsets.only(top: 10),
+                  child: Center(
+                    child: Text(
+                      "Referral Code",
+                      style: TextStyle(
+                          color: Colors.deepOrange,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14.0),
                     ),
-                    Container(
-                      padding: EdgeInsets.symmetric(vertical: 20.0),
-                      child: Center(
-                        child: Text(
-                          "${garage.referralCode}",
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20.0),
-                        ),
-                      ),
-                    )
-                  ],
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(bottom: 20),
+                  child: Center(
+                    child: Text(
+                      "${garage.referralCode}",
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20.0),
+                    ),
+                  ),
                 ),
               ]))
         ],
