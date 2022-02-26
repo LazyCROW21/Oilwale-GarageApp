@@ -141,6 +141,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       ElevatedButton(
                         onPressed: () async {
+                          print("Gaand me danda");
                           if (_formkey.currentState != null &&
                               !_formkey.currentState!.validate()) {
                             return;
@@ -150,6 +151,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           });
 
                           if (await AuthManager.login(_phone, _pwd)) {
+
                             Navigator.pushReplacementNamed(
                                 context, '/garage_home');
                           } else {
